@@ -14,69 +14,62 @@ import com.uos.uosinfo.R;
 /**
  * Created by user on 2015-12-30.
  */
-public class PassFinderFragment extends Fragment implements View.OnClickListener{
+public class PassFinderFragment extends Fragment implements View.OnClickListener {
     private Boolean isFabOpen = false;
-    private FloatingActionButton fab,fab1,fab2;
-    private Animation fab_open,fab_close,rotate_forward,rotate_backward;
+    private FloatingActionButton mFloatingPlus, mFloatingSchedule, mFloatingNotice;
+    private Animation fab_open, fab_close, rotate_forward, rotate_backward;
 
     View mView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.activity_pass_finder,container,false);
+        mView = inflater.inflate(R.layout.activity_pass_finder, container, false);
         init();
         return mView;
     }
-    void init(){
-        fab = (FloatingActionButton)mView.findViewById(R.id.fab);
-        fab1 = (FloatingActionButton)mView.findViewById(R.id.fab1);
-        fab2 = (FloatingActionButton)mView.findViewById(R.id.fab2);
+
+    void init() {
+        mFloatingPlus = (FloatingActionButton) mView.findViewById(R.id.plus_button);
+        mFloatingSchedule = (FloatingActionButton) mView.findViewById(R.id.schedule_button);
+        mFloatingNotice = (FloatingActionButton) mView.findViewById(R.id.notice_button);
         fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getContext(),R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getContext(),R.anim.rotate_backward);
-        fab.setOnClickListener(this);
-        fab1.setOnClickListener(this);
-        fab2.setOnClickListener(this);
+        rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
+        mFloatingPlus.setOnClickListener(this);
+        mFloatingSchedule.setOnClickListener(this);
+        mFloatingNotice.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
-            case R.id.fab:
-
+        switch (id) {
+            case R.id.plus_button:
                 animateFAB();
                 break;
-            case R.id.fab1:
-
+            case R.id.schedule_button:
                 break;
-            case R.id.fab2:
-
-
+            case R.id.notice_button:
                 break;
         }
     }
 
-    public void animateFAB(){
-
-        if(isFabOpen){
-
-            fab.startAnimation(rotate_backward);
-            fab1.startAnimation(fab_close);
-            fab2.startAnimation(fab_close);
-            fab1.setClickable(false);
-            fab2.setClickable(false);
+    public void animateFAB() {
+        if (isFabOpen) {
+            mFloatingPlus.startAnimation(rotate_backward);
+            mFloatingSchedule.startAnimation(fab_close);
+            mFloatingNotice.startAnimation(fab_close);
+            mFloatingSchedule.setClickable(false);
+            mFloatingNotice.setClickable(false);
             isFabOpen = false;
-
         } else {
-
-            fab.startAnimation(rotate_forward);
-            fab1.startAnimation(fab_open);
-            fab2.startAnimation(fab_open);
-            fab1.setClickable(true);
-            fab2.setClickable(true);
+            mFloatingPlus.startAnimation(rotate_forward);
+            mFloatingSchedule.startAnimation(fab_open);
+            mFloatingNotice.startAnimation(fab_open);
+            mFloatingSchedule.setClickable(true);
+            mFloatingNotice.setClickable(true);
             isFabOpen = true;
-
         }
     }
 }
