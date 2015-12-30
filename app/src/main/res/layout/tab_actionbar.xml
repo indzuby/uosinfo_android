@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_weight="5"
+    android:background="@color/theme_color"
+    android:layout_height="60dp">
+    <LinearLayout
+        android:background="@drawable/tab_selector"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/pass_finder">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/oval"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="패스파인더"
+            style="@style/TabText"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/career_finder"
+        android:background="@drawable/tab_selector"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/oval"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="진로탐색기"
+            style="@style/TabText"
+            android:layout_height="wrap_content" /></LinearLayout>
+    <LinearLayout
+        android:background="@drawable/tab_selector"
+        android:id="@+id/qna"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/oval"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="진로진학 상담"
+            style="@style/TabText"
+            android:layout_height="wrap_content" /></LinearLayout>
+    <LinearLayout
+        android:id="@+id/information"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:background="@drawable/tab_selector"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/oval"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="학부 · 과 안내"
+            style="@style/TabText"
+            android:layout_height="wrap_content" /></LinearLayout>
+    <LinearLayout
+        android:id="@+id/library"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/tab_selector"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/oval"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="자료실"
+            style="@style/TabText"
+            android:layout_height="wrap_content" /></LinearLayout>
+</LinearLayout>
