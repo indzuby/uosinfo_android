@@ -2,47 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
     android:background="@mipmap/main_bg01"
+    android:gravity="center_vertical"
     android:orientation="vertical">
+
     <TextView
+        android:id="@+id/pathfinder_header"
         android:layout_width="wrap_content"
-        android:text="THIS"
-        android:layout_height="wrap_content" />
-    <LinearLayout
-        android:layout_width="276dp"
-        android:layout_height="356dp"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:elevation="4dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:text="THIS WEEK`S PATHFINDER"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="172dp"
-            android:background="@color/white">
+    <include layout="@layout/element_pass_finder_card" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/karl_popper" />
-        </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="16dp"
-        android:layout_gravity="center_horizontal|bottom">
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center">
 
         <ImageButton
             android:layout_width="10dp"

@@ -11,4 +11,7 @@
     <color name="fab_color">#FF5540</color>
     <color name="gray">#eee</color>
     <color name="fab_text_color">#ECEFF1</color>
+    <color name="fab_arrow_color">#0DBFA5</color>
+    <color name="path_subject">#B0BEC5</color>
+    <color name="path_contents">#334249</color>
 </resources>
