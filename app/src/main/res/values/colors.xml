@@ -14,4 +14,5 @@
     <color name="fab_arrow_color">#0DBFA5</color>
     <color name="path_subject">#B0BEC5</color>
     <color name="path_contents">#334249</color>
+    <color name="floating_background">#AA000000</color>
 </resources>

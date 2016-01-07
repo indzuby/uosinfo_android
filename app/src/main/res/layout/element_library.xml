@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:layout_height="60dp">
+    <ImageView
+        android:id="@+id/new_icon"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:src="@mipmap/new_button"
+        android:layout_marginRight="16dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_toRightOf="@+id/new_icon"
+        android:id="@+id/library_title"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:textColor="@color/path_contents"
+        android:textSize="16sp"
+        android:singleLine="true"
+        android:text="2016학년도 수시모집 입시안내 공지"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="14dp"
+        android:paddingLeft="14dp"
+        android:src="@mipmap/download"
+        android:layout_height="match_parent" />
+</RelativeLayout>
