@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.uos.uosinfo.MainActivity">
+    tools:context=".main.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -16,7 +16,20 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:src="@mipmap/logo"
+                android:background="@null"
+                android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:paddingLeft="12dp"
+            android:textColor="@color/white"
+            android:text="서울시립대학교 진로가이드"
+            android:layout_height="wrap_content" />
+        </android.support.v7.widget.Toolbar>
         <android.support.design.widget.TabLayout
             android:layout_width="match_parent"
             android:id="@+id/tabs"
@@ -24,7 +37,7 @@
             app:tabGravity="fill"
             app:tabTextColor="@android:color/white"
             app:tabIndicatorColor="@android:color/white"
-            app:tabIndicatorHeight="4dp"
+            app:tabIndicatorHeight="3dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="wrap_content" />
     </android.support.design.widget.AppBarLayout>

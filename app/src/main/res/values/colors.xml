@@ -8,4 +8,7 @@
     <color name="translate">#00000000</color>
     <color name="theme_color">#607D8B</color>
     <color name="text_unfocus">#7E96A2</color>
+    <color name="fab_color">#FF5540</color>
+    <color name="gray">#eee</color>
+    <color name="fab_text_color">#ECEFF1</color>
 </resources>
