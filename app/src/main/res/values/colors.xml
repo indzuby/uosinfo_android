@@ -19,4 +19,7 @@
     <color name="career_body_subject_background">#40FFFFFF</color>
     <color name="model_not_zero">#26C6DA</color>
     <color name="model_zero">#BEBEBE</color>
+    <color name="word_unselected">#80FFFFFF</color>
+    <color name="step_bar_off">#55ffffff</color>
+    <color name="step_bar_on">#ffffff</color>
 </resources>

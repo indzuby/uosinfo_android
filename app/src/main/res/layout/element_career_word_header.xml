@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:text="다음 중 자신의 성향에 가까운 영어 단어를 모두 고르세요"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="6"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_height="2dp">
+        <View
+            android:id="@+id/step1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/career_step_bar_selector"
+            android:layout_height="match_parent"/>
+        <View
+            android:id="@+id/step2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/career_step_bar_selector"
+            android:layout_height="match_parent"/>
+        <View
+            android:id="@+id/step3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/career_step_bar_selector"
+            android:layout_height="match_parent"/>
+        <View
+            android:id="@+id/step4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/career_step_bar_selector"
+            android:layout_height="match_parent"/>
+        <View
+            android:id="@+id/step5"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/career_step_bar_selector"
+            android:layout_height="match_parent"/>
+        <View
+            android:id="@+id/step6"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/career_step_bar_selector"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</LinearLayout>

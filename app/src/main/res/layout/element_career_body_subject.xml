@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:src="@mipmap/plus"
+            android:src="@drawable/career_header_button_selector"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content" />
     </RelativeLayout>

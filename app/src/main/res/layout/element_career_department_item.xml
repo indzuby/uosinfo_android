@@ -47,5 +47,12 @@
             <include layout="@layout/element_college_model"/>
             <include layout="@layout/element_college_model"/>
         </LinearLayout>
+        <ImageButton
+            android:id="@+id/information"
+            android:layout_width="wrap_content"
+            android:background="@null"
+            android:src="@mipmap/information"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </LinearLayout>
