@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +14,7 @@ import com.uos.uosinfo.R;
 import com.uos.uosinfo.tabs.CareerFinderFragment;
 import com.uos.uosinfo.tabs.InformationFragment;
 import com.uos.uosinfo.tabs.LibraryFragment;
-import com.uos.uosinfo.tabs.PassFinderFragment;
+import com.uos.uosinfo.tabs.PathFinderFragment;
 import com.uos.uosinfo.tabs.QnaFragment;
 
 /**
@@ -39,7 +38,7 @@ public class TabPagerAdapter extends FragmentPagerAdapter{
         switch (position) {
             case 0:
                 if(mPass ==null)
-                    mPass = new PassFinderFragment();
+                    mPass = new PathFinderFragment();
                 return mPass;
             case 1:
                 if(mCareer ==null)

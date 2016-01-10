@@ -31,6 +31,7 @@
         android:layout_marginBottom="8dp"
         android:layout_height="wrap_content">
         <ImageButton
+            android:id="@+id/translate_img_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/fab_arrow_mini_oval"
@@ -60,6 +61,7 @@
         android:visibility="invisible"
         android:layout_height="wrap_content">
         <ImageButton
+            android:id="@+id/bg_img_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/fab_arrow_mini_oval"
@@ -89,6 +91,7 @@
         android:visibility="invisible"
         android:layout_height="wrap_content">
         <ImageButton
+            android:id="@+id/last_img_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/fab_arrow_mini_oval"

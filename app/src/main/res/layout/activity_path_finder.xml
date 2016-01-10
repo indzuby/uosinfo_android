@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@mipmap/main_bg01"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -12,7 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
-        <include layout="@layout/element_pass_finder" />
+        <include layout="@layout/element_path_finder" />
     </LinearLayout>
     <ImageButton
         android:id="@+id/plus_button"

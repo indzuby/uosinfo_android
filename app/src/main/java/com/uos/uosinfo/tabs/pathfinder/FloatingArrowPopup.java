@@ -1,4 +1,4 @@
-package com.uos.uosinfo.tabs.passfinder;
+package com.uos.uosinfo.tabs.pathfinder;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -21,7 +21,7 @@ public class FloatingArrowPopup extends Dialog implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.element_pathfinder_floating);
+        setContentView(R.layout.element_path_finder_floating);
         setLayout();
         findViewById(R.id.layout).setOnClickListener(this);
     }
@@ -43,8 +43,11 @@ public class FloatingArrowPopup extends Dialog implements View.OnClickListener {
 
         mFloatingArrow.setOnClickListener(this);
         mTransLateButton.setOnClickListener(mListener);
+        findViewById(R.id.translate_img_button).setOnClickListener(mListener);
         mBgButton.setOnClickListener(mListener);
+        findViewById(R.id.bg_img_button).setOnClickListener(mListener);
         mLastButton.setOnClickListener(mListener);
+        findViewById(R.id.last_img_button).setOnClickListener(mListener);
 
         mTransLateButton.startAnimation(fab_open);
         mBgButton.startAnimation(fab_open);
