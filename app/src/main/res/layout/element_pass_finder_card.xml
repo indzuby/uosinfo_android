@@ -33,13 +33,13 @@
 
                 <TextView
                     android:id="@+id/pathfinder_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="190dp"
                     android:layout_height="wrap_content"
                     android:alpha="0.8"
-                    android:lineSpacingExtra="6dp"
-                    android:text="˝the attempt to mkae\ninvariably produces hell˝"
+                    android:gravity="right"
+                    android:text="˝the attempt to mkae invariably produces hell˝"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/career_body_subject_background"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/college" />
+
+        <TextView
+            android:id="@+id/department_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="36dp"
+            android:text="College of Humanities"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:src="@mipmap/plus"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

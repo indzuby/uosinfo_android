@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/model"
+    android:layout_marginRight="4dp"
+    android:layout_width="24dp"
+    android:layout_height="12dp"
+    android:background="@drawable/model_selector"
+    android:gravity="center"
+    android:text="종합"
+    android:textColor="@color/white"
+    android:textSize="8dp"
+    android:textStyle="bold" />

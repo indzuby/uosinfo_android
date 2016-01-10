@@ -15,4 +15,8 @@
     <color name="path_subject">#B0BEC5</color>
     <color name="path_contents">#334249</color>
     <color name="floating_background">#AA000000</color>
+    <color name="career_popup_confirm">#009688</color>
+    <color name="career_body_subject_background">#40FFFFFF</color>
+    <color name="model_not_zero">#26C6DA</color>
+    <color name="model_zero">#BEBEBE</color>
 </resources>

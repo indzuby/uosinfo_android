@@ -17,8 +17,10 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Typekit.getInstance()
+                .addCustom1(Typekit.createFromAsset(this, "Spoqa_Han_Sans_Thin.ttf"))
                 .addNormal(Typekit.createFromAsset(this, "Spoqa_Han_Sans_Regular.ttf"))
                 .addBold(Typekit.createFromAsset(this, "Spoqa_Han_Sans_Bold.ttf"));
+
         Parse.enableLocalDatastore(this);
 
         // Add your initialization code here

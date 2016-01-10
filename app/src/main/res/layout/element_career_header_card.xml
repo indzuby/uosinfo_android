@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/translate"
+    android:layout_height="172dp">
+
+    <ImageView
+        android:layout_width="276dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/karl_popper" />
+    <LinearLayout
+        android:layout_width="276dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="right"
+        android:paddingRight="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pathfinder_title"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.8"
+            android:gravity="right"
+            android:text="˝the attempt to mkae invariably produces hell˝"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pathfinder_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="16dp"
+            android:text="Karl Popper"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="40dp"
+        android:background="@drawable/fab_arrow_mini_oval"
+        android:elevation="1dp"
+        android:src="@mipmap/ab_translate" />
+</FrameLayout>
