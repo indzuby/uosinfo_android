@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/translate"
     android:layout_height="match_parent">
 
     <FrameLayout
@@ -16,14 +15,14 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="172dp"
                 android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/path_finder_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:scaleType="fitXY" />
 
                 <LinearLayout
@@ -40,6 +39,7 @@
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
                         android:gravity="right"
+                        android:maxLines="4"
                         android:text="˝the attempt to mkae invariably produces hell˝"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -107,10 +107,11 @@
                         android:src="@mipmap/link" />
 
                     <TextView
-                        android:singleLine="true"
+                        android:maxLines="1"
                         android:id="@+id/path_finder_college"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         android:text="College of humanities"
                         android:textColor="@color/path_contents"
                         android:textSize="12sp" />

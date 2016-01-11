@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.domain.PathFinder;
+import com.uos.uosinfo.tabs.PathFinderFragment;
+import com.uos.uosinfo.utils.BgUtils;
 import com.uos.uosinfo.utils.JsonUtils;
 
 /**
@@ -53,6 +56,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
         TextView person = (TextView) mView.findViewById(R.id.path_finder_person);
         Glide.with(getActivity()).load(mPass.getImage()).fitCenter().crossFade().into(image);
         person.setText(mPass.getName());
+
     }
 
     private void initBody(){
@@ -69,14 +73,14 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
     private void setLanguage(){
         if(language) {
             mTitle.setText(mPass.getKo().getTitle());
-            mCollege.setText(mPass.getKo().getTitle());
+            mCollege.setText(mPass.getKo().getCollege());
             mField.setText(mPass.getKo().getField());
             mWikiKo.setText("위키백과(국문)");
             mWikiEn.setText("위키백과(영문)");
             mBook.setText("구글북스 검색결과");
         }else {
             mTitle.setText(mPass.getEn().getTitle());
-            mCollege.setText(mPass.getEn().getTitle());
+            mCollege.setText(mPass.getEn().getCollege());
             mField.setText(mPass.getEn().getField());
             mWikiKo.setText("wikipedia.org(ko)");
             mWikiEn.setText("wikipedia.org(en)");
@@ -97,6 +101,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
                     break;
                 case R.id.bg_img_button:
                 case R.id.bg_button:
+                    ((PathFinderFragment)getParentFragment()).changeBg();
                     break;
                 case R.id.last_img_button:
                 case R.id.last_button:
