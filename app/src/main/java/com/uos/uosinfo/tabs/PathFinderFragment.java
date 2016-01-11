@@ -38,6 +38,7 @@ public class PathFinderFragment extends Fragment implements View.OnClickListener
     FrameLayout mPathFinderBg;
     int bgRes = R.mipmap.main_bg01;
     LinearLayout mOvalContainer;
+    private boolean language = false; // false : En , true : Ko;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.activity_path_finder, container, false);
@@ -132,5 +133,8 @@ public class PathFinderFragment extends Fragment implements View.OnClickListener
         bgRes  = BgUtils.getOtherBg(bgRes);
         mPathFinderBg.setBackground(getActivity().getDrawable(bgRes));
     }
-
+    public void changeLanguage(){
+        language = !language;
+        mAdapter.changeLanguage(language);
+    }
 }

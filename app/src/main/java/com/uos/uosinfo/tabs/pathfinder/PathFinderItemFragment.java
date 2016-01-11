@@ -47,7 +47,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
 
         initHeader();
         initBody();
-        setLanguage();
+        setLanguage(false);
     }
     private void initHeader(){
 
@@ -70,7 +70,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
         mBook.setOnClickListener(this);
     }
 
-    private void setLanguage(){
+    public void setLanguage(boolean language){
         if(language) {
             mTitle.setText(mPass.getKo().getTitle());
             mCollege.setText(mPass.getKo().getCollege());
@@ -95,9 +95,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
             switch (id) {
                 case R.id.translate_img_button:
                 case R.id.translate_button:
-                    language = !language;
-                    setLanguage();
-
+                    ((PathFinderFragment)getParentFragment()).changeLanguage();
                     break;
                 case R.id.bg_img_button:
                 case R.id.bg_button:
