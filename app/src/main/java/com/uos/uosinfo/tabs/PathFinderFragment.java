@@ -21,6 +21,7 @@ import com.uos.uosinfo.domain.PathFinder;
 import com.uos.uosinfo.main.FloatingPopup;
 import com.uos.uosinfo.ui.PagerPoint;
 import com.uos.uosinfo.utils.BgUtils;
+import com.uos.uosinfo.utils.ParseUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -79,7 +80,7 @@ public class PathFinderFragment extends Fragment implements View.OnClickListener
             public void done(List<ParseObject> pathFinders, ParseException e) {
                 if (e == null) {
                     Log.e("TAG", pathFinders.size() + "");
-                    mPass = PathFinder.PasreUtil.parseLibrary(pathFinders);
+                    mPass = ParseUtils.parsePathFinders(pathFinders);
                     mAdapter = new PathFinderAdapter(getChildFragmentManager(), getActivity(), mPass);
                     mViewPager.setOffscreenPageLimit(mPass.size() - 1);
                     mViewPager.setAdapter(mAdapter);

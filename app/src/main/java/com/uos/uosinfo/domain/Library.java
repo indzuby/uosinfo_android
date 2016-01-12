@@ -1,21 +1,34 @@
 package com.uos.uosinfo.domain;
 
-import com.parse.ParseObject;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by user on 2016-01-07.
  */
-
+@DatabaseTable(tableName = "library")
 public class Library {
 
+    @DatabaseField(columnName ="object_id",id = true)
+    String objectId;
+    @DatabaseField
     String title;
-    Date createdAt;
+    @DatabaseField(columnName = "create_datetime")
+    Date createDatetime;
+    @DatabaseField
     String url;
-    String contents;
+    @DatabaseField
+    String content;
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
     public String getTitle() {
         return title;
@@ -25,12 +38,12 @@ public class Library {
         this.title = title;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreateDatetime() {
+        return createDatetime;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
     }
 
     public String getUrl() {
@@ -41,26 +54,12 @@ public class Library {
         this.url = url;
     }
 
-    public String getContents() {
-        return contents;
+    public String getContent() {
+        return content;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public static class PasreUtil{
-        public static List<Library> parseLibrary(List<ParseObject> libraries) {
-            List<Library> lib = new ArrayList<>();
-            for(ParseObject object : libraries) {
-                Library library = new Library();
-                library.setTitle(object.getString("title"));
-                library.setCreatedAt(object.getCreatedAt());
-                library.setUrl(object.getString("url"));
-                library.setContents(object.getString("content"));
-                lib.add(library);
-            }
-            return lib;
-        }
-    }
 }

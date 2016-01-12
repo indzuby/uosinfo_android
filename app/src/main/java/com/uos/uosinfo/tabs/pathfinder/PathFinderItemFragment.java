@@ -72,16 +72,16 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
 
     public void setLanguage(boolean language){
         if(language) {
-            mTitle.setText(mPass.getKo().getTitle());
-            mCollege.setText(mPass.getKo().getCollege());
-            mField.setText(mPass.getKo().getField());
+            mTitle.setText(mPass.getTitleKo());
+            mCollege.setText(mPass.getCollegeKo());
+            mField.setText(mPass.getFieldKo());
             mWikiKo.setText("위키백과(국문)");
             mWikiEn.setText("위키백과(영문)");
             mBook.setText("구글북스 검색결과");
         }else {
-            mTitle.setText(mPass.getEn().getTitle());
-            mCollege.setText(mPass.getEn().getCollege());
-            mField.setText(mPass.getEn().getField());
+            mTitle.setText(mPass.getTitleEn());
+            mCollege.setText(mPass.getCollegeEn());
+            mField.setText(mPass.getFieldEn());
             mWikiKo.setText("wikipedia.org(ko)");
             mWikiEn.setText("wikipedia.org(en)");
             mBook.setText("Google Books Search Results");
@@ -119,12 +119,12 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
                 mfFloatingArrowPopup.show();
                 break;
             case R.id.path_finder_wiki_en:
-                uri = Uri.parse(mPass.getEn().getWiki());
+                uri = Uri.parse(mPass.getWikiEn());
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(launchBrowser);
                 break;
             case R.id.path_finder_wiki_ko:
-                uri = Uri.parse(mPass.getKo().getWiki());
+                uri = Uri.parse(mPass.getWikiKo());
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(launchBrowser);
                 break;

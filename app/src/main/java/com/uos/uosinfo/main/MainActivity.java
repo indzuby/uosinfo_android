@@ -24,7 +24,7 @@ public class MainActivity extends BaseAcitvity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        MainViewPager viewPager = (MainViewPager) findViewById(R.id.viewpager);
+        final MainViewPager viewPager = (MainViewPager) findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(4);
         TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(),getBaseContext());
         viewPager.setAdapter(adapter);
@@ -36,6 +36,22 @@ public class MainActivity extends BaseAcitvity{
             tab.setCustomView(adapter.getTabView(i));
         }
         selectedTab(0);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                selectedTab(tab.getPosition());
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
     public void selectedTab(int position){
         for(int i = 0; i<tabLayout.getTabCount();i++) {
