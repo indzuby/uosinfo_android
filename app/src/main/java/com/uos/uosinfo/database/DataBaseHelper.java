@@ -86,8 +86,16 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         return libraryDao.idExists(objectID);
     }
 
-//    public boolean hasPathFinderThisMonth(Date nowDate) {
-//
-//    }
-
+    public boolean hasPathFinderThisMonth(Date nowDate) throws SQLException{
+        Dao<PathFinder,String> pathFinderDao = getPathFinderDao();
+        if(pathFinderDao.countOf()==0)
+            return false;
+        return pathFinderDao.queryBuilder().where().ge("start_datetime",nowDate).and().le("end_datetime",nowDate).countOf()>0;
+    }
+    public List<PathFinder> selectPathFinderByMonth(int month) throws SQLException{
+        Dao<PathFinder,String> pathFinderDao = getPathFinderDao();
+        if(pathFinderDao.countOf()==0)
+            return null;
+        return pathFinderDao.queryBuilder().where().ge("MONTH(start_datetime)",month).and().le("MONTH(end_datetime)",month).query();
+    }
 }
