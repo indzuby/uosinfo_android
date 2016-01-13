@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.domain.PathFinder;
+import com.uos.uosinfo.tabs.PathFinderFragment;
+import com.uos.uosinfo.utils.BgUtils;
 import com.uos.uosinfo.utils.JsonUtils;
 
 /**
@@ -44,7 +47,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
 
         initHeader();
         initBody();
-        setLanguage();
+        setLanguage(false);
     }
     private void initHeader(){
 
@@ -53,6 +56,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
         TextView person = (TextView) mView.findViewById(R.id.path_finder_person);
         Glide.with(getActivity()).load(mPass.getImage()).fitCenter().crossFade().into(image);
         person.setText(mPass.getName());
+
     }
 
     private void initBody(){
@@ -66,18 +70,18 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
         mBook.setOnClickListener(this);
     }
 
-    private void setLanguage(){
+    public void setLanguage(boolean language){
         if(language) {
-            mTitle.setText(mPass.getKo().getTitle());
-            mCollege.setText(mPass.getKo().getTitle());
-            mField.setText(mPass.getKo().getField());
+            mTitle.setText(mPass.getTitleKo());
+            mCollege.setText(mPass.getCollegeKo());
+            mField.setText(mPass.getFieldKo());
             mWikiKo.setText("위키백과(국문)");
             mWikiEn.setText("위키백과(영문)");
             mBook.setText("구글북스 검색결과");
         }else {
-            mTitle.setText(mPass.getEn().getTitle());
-            mCollege.setText(mPass.getEn().getTitle());
-            mField.setText(mPass.getEn().getField());
+            mTitle.setText(mPass.getTitleEn());
+            mCollege.setText(mPass.getCollegeEn());
+            mField.setText(mPass.getFieldEn());
             mWikiKo.setText("wikipedia.org(ko)");
             mWikiEn.setText("wikipedia.org(en)");
             mBook.setText("Google Books Search Results");
@@ -91,12 +95,11 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
             switch (id) {
                 case R.id.translate_img_button:
                 case R.id.translate_button:
-                    language = !language;
-                    setLanguage();
-
+                    ((PathFinderFragment)getParentFragment()).changeLanguage();
                     break;
                 case R.id.bg_img_button:
                 case R.id.bg_button:
+                    ((PathFinderFragment)getParentFragment()).changeBg();
                     break;
                 case R.id.last_img_button:
                 case R.id.last_button:
@@ -116,12 +119,12 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
                 mfFloatingArrowPopup.show();
                 break;
             case R.id.path_finder_wiki_en:
-                uri = Uri.parse(mPass.getEn().getWiki());
+                uri = Uri.parse(mPass.getWikiEn());
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(launchBrowser);
                 break;
             case R.id.path_finder_wiki_ko:
-                uri = Uri.parse(mPass.getKo().getWiki());
+                uri = Uri.parse(mPass.getWikiKo());
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(launchBrowser);
                 break;

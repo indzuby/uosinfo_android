@@ -16,9 +16,7 @@ import com.uos.uosinfo.domain.Library;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.w3c.dom.Text;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,7 +61,7 @@ public class LibraryAdapter extends BaseAdapter{
 
         DateTime date = new DateTime();
         newIcon.setVisibility(View.GONE);
-        if(Math.abs(Days.daysBetween(date,new DateTime(library.getCreatedAt())).getDays())<=3)
+        if(Math.abs(Days.daysBetween(date,new DateTime(library.getCreateDatetime())).getDays())<=3)
             newIcon.setVisibility(View.VISIBLE);
         title.setText(library.getTitle());
         download.setOnClickListener(new View.OnClickListener() {
