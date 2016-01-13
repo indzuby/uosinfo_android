@@ -76,7 +76,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:singleLine="true" 
+                    android:singleLine="true"
                     android:id="@+id/path_finder_field"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
