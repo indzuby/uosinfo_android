@@ -3,10 +3,7 @@ package com.uos.uosinfo.main;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +23,7 @@ public class MainActivity extends BaseAcitvity{
         setSupportActionBar(toolbar);
         final MainViewPager viewPager = (MainViewPager) findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(4);
-        TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(),getBaseContext());
+        final TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(),getBaseContext());
         viewPager.setAdapter(adapter);
         viewPager.setPagingEnabled(false);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -41,6 +38,8 @@ public class MainActivity extends BaseAcitvity{
             public void onTabSelected(TabLayout.Tab tab) {
                 selectedTab(tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
+                adapter.init(tab.getPosition());
+
             }
 
             @Override

@@ -3,4 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="parse_app_id">awNZpltR59MzqDzDi7d99GQCFlZJarigNJrTdnFr</string>
     <string name="parse_client_key">XmN7QDBRHryqJW1fiYBz8MDC0TMqLTHGHoqeaYJt</string>
+    <string name="career_find_popup_1">본 진로탐색기능은 영단어를 기반으로 한 개발한 간이 검사 프로그램입니다.\n보다 정확한 결과를 원할 경우 전문 기관과의 상담을 권장합니다.</string>
+    <string name="career_find_popup_2">제시되는 영단어 중 자신의 성향과 관련이 높거나 가깝다고 생각하는 것을 선택한 후 \'다음\' 버튼을 눌러서 단계별로 진행하세요.</string>
+    <string name="career_find_popup_3">검사 완료 후 검사자의 진로와 관련한 패스파인더(인물)와 우리 대학의 단과대학이 제시됩니다. 이는 참고 자료로만 활용하기 바랍니다.</string>
 </resources>

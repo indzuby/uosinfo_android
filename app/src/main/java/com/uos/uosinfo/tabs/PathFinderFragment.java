@@ -19,6 +19,7 @@ import com.uos.uosinfo.adapter.PathFinderAdapter;
 import com.uos.uosinfo.database.DataBaseUtils;
 import com.uos.uosinfo.domain.PathFinder;
 import com.uos.uosinfo.main.FloatingPopup;
+import com.uos.uosinfo.main.UosFragment;
 import com.uos.uosinfo.tabs.pathfinder.PathFinderItemFragment;
 import com.uos.uosinfo.ui.PagerPoint;
 import com.uos.uosinfo.utils.BgUtils;
@@ -34,7 +35,7 @@ import java.util.List;
 /**
  * Created by user on 2015-12-30.
  */
-public class PathFinderFragment extends Fragment implements View.OnClickListener {
+public class PathFinderFragment extends UosFragment implements View.OnClickListener {
     private ImageButton mFloatingPlus;
     private FloatingPopup mfFloatingPopup;
     View mView;
@@ -60,7 +61,7 @@ public class PathFinderFragment extends Fragment implements View.OnClickListener
         return mView;
     }
 
-    void init() {
+    public void init() {
         mDataBaseUtils = new DataBaseUtils(getContext());
         mPathFinderBg = (FrameLayout) mView.findViewById(R.id.path_finder_bg);
         mFloatingPlus = (ImageButton) mView.findViewById(R.id.plus_button);
