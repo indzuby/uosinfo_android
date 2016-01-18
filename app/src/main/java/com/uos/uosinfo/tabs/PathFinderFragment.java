@@ -14,15 +14,20 @@ import android.widget.LinearLayout;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.adapter.PathFinderAdapter;
+import com.uos.uosinfo.database.DataBaseUtils;
 import com.uos.uosinfo.domain.PathFinder;
 import com.uos.uosinfo.main.FloatingPopup;
+import com.uos.uosinfo.tabs.pathfinder.PathFinderItemFragment;
 import com.uos.uosinfo.ui.PagerPoint;
 import com.uos.uosinfo.utils.BgUtils;
+import com.uos.uosinfo.utils.JsonUtils;
 import com.uos.uosinfo.utils.ParseUtils;
 
+import org.joda.time.DateTime;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,11 +40,19 @@ public class PathFinderFragment extends Fragment implements View.OnClickListener
     View mView;
     ViewPager mViewPager;
     PathFinderAdapter mAdapter;
-    List<PathFinder> mPass;
+    List<PathFinder> mPath;
+    List<Fragment> mFragments;
     FrameLayout mPathFinderBg;
     int bgRes = R.mipmap.main_bg01;
     LinearLayout mOvalContainer;
+    DataBaseUtils mDataBaseUtils;
     private boolean language = false; // false : En , true : Ko;
+    private boolean isThisMonth = true; // false : lastMonth, true : thisMonth\
+
+    public boolean isLanguage() {
+        return language;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.activity_path_finder, container, false);
@@ -48,14 +61,15 @@ public class PathFinderFragment extends Fragment implements View.OnClickListener
     }
 
     void init() {
+        mDataBaseUtils = new DataBaseUtils(getContext());
         mPathFinderBg = (FrameLayout) mView.findViewById(R.id.path_finder_bg);
         mFloatingPlus = (ImageButton) mView.findViewById(R.id.plus_button);
         mViewPager = (ViewPager) mView.findViewById(R.id.viewPager);
         mOvalContainer = (LinearLayout) mView.findViewById(R.id.oval_container);
         mFloatingPlus.setOnClickListener(this);
-
+        mFragments = new ArrayList<>();
         mPathFinderBg.setBackground(getActivity().getDrawable(bgRes));
-        getPassFinderData();
+        getPathFinderThisMonthByDataBase();
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -73,28 +87,77 @@ public class PathFinderFragment extends Fragment implements View.OnClickListener
             }
         });
     }
-    void getPassFinderData(){
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("PathFinder");
-        query.whereLessThanOrEqualTo("startDatetime",new Date()).whereGreaterThanOrEqualTo("endDatetime",new Date()).findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> pathFinders, ParseException e) {
-                if (e == null) {
-                    Log.e("TAG", pathFinders.size() + "");
-                    mPass = ParseUtils.parsePathFinders(pathFinders);
-                    mAdapter = new PathFinderAdapter(getChildFragmentManager(), getActivity(), mPass);
-                    mViewPager.setOffscreenPageLimit(mPass.size() - 1);
-                    mViewPager.setAdapter(mAdapter);
-                    setOvalContainer();
-                    changeOvalState(0);
-                } else {
-                    Log.e("TAG", "Error: " + e.getMessage());
-                }
+    void getPathFinderThisMonthByDataBase(){
+        mPath = mDataBaseUtils.selectPathFinderThisMonth();
+        setFragments();
+        mAdapter = new PathFinderAdapter(getChildFragmentManager(),getContext(), mFragments);
+        mViewPager.setAdapter(mAdapter);
+        if(mPath.size()<=0)
+            getPathFinderThisMonthByParse();
+        else
+            changeData();
+
+    }
+    private void setFragments(){
+        mFragments.clear();
+        for(PathFinder pathFinder : mPath) {
+            Fragment fragment = new PathFinderItemFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("pathFinder", JsonUtils.objectToJson(pathFinder));
+            fragment.setArguments(bundle);
+            mFragments.add(fragment);
+        }
+    }
+    void getPathFinderLastMonthByDataBase(){
+        mPath = mDataBaseUtils.selectPathFinderLastMonth();
+        if(mPath.size()<=0)
+            getPathFinderLastMonthByParse();
+        else
+            changeData();
+    }
+    void getPathFinderThisMonthByParse(){
+        mDataBaseUtils.getPathFinderByParse(new Date(), thisCallback);
+    }
+    void getPathFinderLastMonthByParse(){
+        mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(),lastCallback);
+    }
+    FindCallback<ParseObject> thisCallback = new FindCallback<ParseObject>() {
+        @Override
+        public void done(List<ParseObject> pathFinders, ParseException e) {
+            if (e == null) {
+                Log.e("TAG", pathFinders.size() + "");
+                mPath = ParseUtils.parsePathFinders(pathFinders);
+                mDataBaseUtils.insertPathFinders(mPath);
+                changeData();
+            } else {
+                Log.e("TAG", "Error: " + e.getMessage());
             }
-        });
+        }
+    };
+    FindCallback<ParseObject> lastCallback = new FindCallback<ParseObject>() {
+        @Override
+        public void done(List<ParseObject> pathFinders, ParseException e) {
+            if (e == null) {
+                Log.e("TAG", pathFinders.size() + "");
+                mPath = ParseUtils.parsePathFinders(pathFinders);
+                mDataBaseUtils.insertPathFinders(mPath);
+                changeData();
+            } else {
+                Log.e("TAG", "Error: " + e.getMessage());
+            }
+        }
+    };
+    private void changeData(){
+        mViewPager.setOffscreenPageLimit(mFragments.size() - 1);
+        setFragments();
+        mAdapter.notifyDataSetChanged();
+        setOvalContainer();
+        mViewPager.setCurrentItem(0);
+        changeOvalState(0);
     }
     private void setOvalContainer(){
         mOvalContainer.removeAllViews();
-        for(int i = 0; i <mPass.size();i++) {
+        for(int i = 0; i < mPath.size();i++) {
             mOvalContainer.addView(PagerPoint.getPoint(getActivity()));
         }
     }
@@ -137,5 +200,19 @@ public class PathFinderFragment extends Fragment implements View.OnClickListener
     public void changeLanguage(){
         language = !language;
         mAdapter.changeLanguage(language);
+    }
+    public void lastPathFinder(){
+        mPath.clear();
+
+        if(isThisMonth) {
+            getPathFinderLastMonthByDataBase();
+        }else {
+            getPathFinderThisMonthByDataBase();
+        }
+        isThisMonth = !isThisMonth;
+    }
+
+    public boolean isThisMonth() {
+        return isThisMonth;
     }
 }

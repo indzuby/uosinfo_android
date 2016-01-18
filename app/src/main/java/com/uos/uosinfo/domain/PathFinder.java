@@ -32,7 +32,7 @@ public class PathFinder {
     String wikiEn;
     @DatabaseField(columnName = "field_ko")
     String fieldKo;
-    @DatabaseField(columnName = "field_ko")
+    @DatabaseField(columnName = "field_en")
     String fieldEn;
     @DatabaseField(columnName = "college_ko")
     String collegeKo;

@@ -101,6 +101,7 @@
             android:layout_marginRight="6dp"
             android:src="@mipmap/ab_lastmonth" />
         <TextView
+            android:id="@+id/last_text"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:text="지난 달의 패스파인더 보기"

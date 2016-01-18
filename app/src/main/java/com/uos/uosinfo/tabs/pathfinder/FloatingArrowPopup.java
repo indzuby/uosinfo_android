@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.uos.uosinfo.R;
 
@@ -65,6 +67,15 @@ public class FloatingArrowPopup extends Dialog implements View.OnClickListener {
             case R.id.arrow_button:
                 dismiss();
                 break;
+        }
+    }
+    public void setLastButton(boolean isThisMonth){
+        if(isThisMonth) {
+            ((ImageView)findViewById(R.id.last_img_button)).setImageResource(R.mipmap.ab_lastmonth);
+            ((TextView)findViewById(R.id.last_text)).setText("지난 달의 패스파인더 보기");
+        }else {
+            ((ImageView)findViewById(R.id.last_img_button)).setImageResource(R.mipmap.ab_thismonth);
+            ((TextView)findViewById(R.id.last_text)).setText("이번 달의 패스파인더 보기");
         }
     }
 }

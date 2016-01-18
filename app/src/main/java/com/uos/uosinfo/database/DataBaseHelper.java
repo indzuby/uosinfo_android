@@ -86,16 +86,14 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         return libraryDao.idExists(objectID);
     }
 
-    public boolean hasPathFinderThisMonth(Date nowDate) throws SQLException{
-        Dao<PathFinder,String> pathFinderDao = getPathFinderDao();
-        if(pathFinderDao.countOf()==0)
-            return false;
-        return pathFinderDao.queryBuilder().where().ge("start_datetime",nowDate).and().le("end_datetime",nowDate).countOf()>0;
+    public boolean insertPathFinder(PathFinder pathfinder) throws SQLException{
+        return (getPathFinderDao().create(pathfinder)>0);
     }
-    public List<PathFinder> selectPathFinderByMonth(int month) throws SQLException{
+    public boolean hasPathFinderThisMonth(Date date) throws SQLException{
         Dao<PathFinder,String> pathFinderDao = getPathFinderDao();
-        if(pathFinderDao.countOf()==0)
-            return null;
-        return pathFinderDao.queryBuilder().where().ge("MONTH(start_datetime)",month).and().le("MONTH(end_datetime)",month).query();
+        return pathFinderDao.queryBuilder().where().le("start_datetime",date).and().ge("end_datetime",date).countOf()>0;
+    }
+    public List<PathFinder> selectPathFinderByDate(Date date) throws SQLException{
+        return getPathFinderDao().queryBuilder().orderBy("display_order", true).where().le("start_datetime", date).and().ge("end_datetime",date).query();
     }
 }

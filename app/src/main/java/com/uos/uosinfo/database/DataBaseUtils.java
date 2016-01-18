@@ -1,21 +1,14 @@
 package com.uos.uosinfo.database;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.uos.uosinfo.adapter.LibraryAdapter;
 import com.uos.uosinfo.domain.Library;
 import com.uos.uosinfo.domain.PathFinder;
-import com.uos.uosinfo.utils.ParseUtils;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
-import org.joda.time.Months;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -74,32 +67,35 @@ public class DataBaseUtils {
         try {
             return mHelper.hasPathFinderThisMonth(new Date());
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public List<PathFinder> selectPathFinderThisMonth() {
+        return selectPathFinderByDate(new Date());
+    }
+    public void getPathFinderByParse(Date date,FindCallback<ParseObject> callback) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("PathFinder");
+        query.whereLessThanOrEqualTo("startDatetime",date).whereGreaterThanOrEqualTo("endDatetime",date).orderByAscending("displayOrder").findInBackground(callback);
+    }
+    public List<PathFinder> selectPathFinderLastMonth() {
+        return selectPathFinderByDate(new DateTime().minusMonths(1).toDate());
+    }
+    private List<PathFinder> selectPathFinderByDate(Date date) {
         try {
-            DateTime dt = new DateTime();
-            return mHelper.selectPathFinderByMonth(dt.getMonthOfYear());
+            return mHelper.selectPathFinderByDate(date);
+        } catch (SQLException e) {
+            return new ArrayList<>();
+        }
+    }
+    public void insertPathFinders(List<PathFinder> pathFinders) {
+        try {
+            for (PathFinder finder : pathFinders) {
+                mHelper.insertPathFinder(finder);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new ArrayList<>();
     }
 
-    int[] beforeMonth = {0,12,1,2,3,4,5,6,7,8,9,10,11};
-    public List<PathFinder> selectPathFinderLastMonth() {
-        DateTime dt = new DateTime();
-        return selectPathFinderByMonth(beforeMonth[dt.getMonthOfYear()]);
-    }
-    private List<PathFinder> selectPathFinderByMonth(int month) {
-        try {
-            return mHelper.selectPathFinderByMonth(month);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return new ArrayList<>();
-    }
 }

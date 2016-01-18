@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.domain.PathFinder;
 import com.uos.uosinfo.tabs.PathFinderFragment;
-import com.uos.uosinfo.utils.BgUtils;
 import com.uos.uosinfo.utils.JsonUtils;
 
 /**
@@ -27,6 +25,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
     View mView;
     PathFinder mPass;
     private boolean language = false; // false : En , true : Ko;
+
     FloatingArrowPopup mfFloatingArrowPopup;
     TextView mTitle,mField,mCollege,mWikiEn,mWikiKo,mBook;
     public PathFinderItemFragment() {
@@ -43,11 +42,12 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
     private void init(){
         mFloatingArrow = (ImageButton) mView.findViewById(R.id.arrow_button);
         mFloatingArrow.setOnClickListener(this);
-        mPass = JsonUtils.JsonToObject(getArguments().getString("passFinder"),PathFinder.class);
+        mPass = JsonUtils.JsonToObject(getArguments().getString("pathFinder"),PathFinder.class);
+        language = ((PathFinderFragment)getParentFragment()).isLanguage();
 
         initHeader();
         initBody();
-        setLanguage(false);
+        setLanguage(language);
     }
     private void initHeader(){
 
@@ -103,6 +103,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
                     break;
                 case R.id.last_img_button:
                 case R.id.last_button:
+                    ((PathFinderFragment)getParentFragment()).lastPathFinder();
                     break;
             }
             mfFloatingArrowPopup.dismiss();
@@ -117,6 +118,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
             case R.id.arrow_button:
                 mfFloatingArrowPopup = new FloatingArrowPopup(getContext(),listener);
                 mfFloatingArrowPopup.show();
+                mfFloatingArrowPopup.setLastButton(((PathFinderFragment) getParentFragment()).isThisMonth());
                 break;
             case R.id.path_finder_wiki_en:
                 uri = Uri.parse(mPass.getWikiEn());
