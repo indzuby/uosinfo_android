@@ -1,4 +1,4 @@
-package com.uos.uosinfo.tabs.careerfinder;
+package com.uos.uosinfo.controller.careerfinder;
 
 import android.app.Dialog;
 import android.content.Context;

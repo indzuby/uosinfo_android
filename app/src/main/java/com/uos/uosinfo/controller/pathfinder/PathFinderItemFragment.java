@@ -1,4 +1,4 @@
-package com.uos.uosinfo.tabs.pathfinder;
+package com.uos.uosinfo.controller.pathfinder;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.domain.PathFinder;
-import com.uos.uosinfo.tabs.PathFinderFragment;
+import com.uos.uosinfo.controller.PathFinderFragment;
 import com.uos.uosinfo.utils.JsonUtils;
 
 /**

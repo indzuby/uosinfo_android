@@ -1,4 +1,4 @@
-package com.uos.uosinfo.tabs;
+package com.uos.uosinfo.controller;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,7 +20,7 @@ import com.uos.uosinfo.database.DataBaseUtils;
 import com.uos.uosinfo.domain.PathFinder;
 import com.uos.uosinfo.main.FloatingPopup;
 import com.uos.uosinfo.main.UosFragment;
-import com.uos.uosinfo.tabs.pathfinder.PathFinderItemFragment;
+import com.uos.uosinfo.controller.pathfinder.PathFinderItemFragment;
 import com.uos.uosinfo.ui.PagerPoint;
 import com.uos.uosinfo.utils.BgUtils;
 import com.uos.uosinfo.utils.JsonUtils;
@@ -38,7 +38,6 @@ import java.util.List;
 public class PathFinderFragment extends UosFragment implements View.OnClickListener {
     private ImageButton mFloatingPlus;
     private FloatingPopup mfFloatingPopup;
-    View mView;
     ViewPager mViewPager;
     PathFinderAdapter mAdapter;
     List<PathFinder> mPath;

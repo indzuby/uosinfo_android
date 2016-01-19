@@ -1,4 +1,4 @@
-package com.uos.uosinfo.tabs;
+package com.uos.uosinfo.controller;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,11 +11,11 @@ import com.uos.uosinfo.main.UosFragment;
 /**
  * Created by user on 2015-12-30.
  */
-public class InformationFragment extends UosFragment {
-    View mView;
+public class QnaFragment extends UosFragment {
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.activity_information,container,false);
+        mView = inflater.inflate(R.layout.activity_qna,container,false);
         return mView;
     }
     public void init(){

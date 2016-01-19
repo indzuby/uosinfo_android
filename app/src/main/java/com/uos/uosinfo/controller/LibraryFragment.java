@@ -1,4 +1,4 @@
-package com.uos.uosinfo.tabs;
+package com.uos.uosinfo.controller;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +24,6 @@ import java.util.List;
  */
 public class LibraryFragment extends UosFragment {
     final String TAG = "Library Fragment";
-    View mView;
     ListView mListView;
     LibraryAdapter adapter;
     List<Library> list;

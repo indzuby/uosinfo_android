@@ -1,4 +1,4 @@
-package com.uos.uosinfo.tabs.pathfinder;
+package com.uos.uosinfo.controller.pathfinder;
 
 import android.app.Dialog;
 import android.content.Context;

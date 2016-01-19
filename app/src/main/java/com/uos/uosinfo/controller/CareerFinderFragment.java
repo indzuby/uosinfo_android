@@ -1,22 +1,20 @@
-package com.uos.uosinfo.tabs;
+package com.uos.uosinfo.controller;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.uos.uosinfo.R;
+import com.uos.uosinfo.common.ConfirmPopup;
+import com.uos.uosinfo.controller.careerfinder.InformationPopup;
 import com.uos.uosinfo.main.UosFragment;
-import com.uos.uosinfo.tabs.careerfinder.InformationPopup;
 import com.uos.uosinfo.utils.SessionUtils;
 
 /**
  * Created by user on 2015-12-30.
  */
 public class CareerFinderFragment extends UosFragment{
-    View mView;
     boolean isFirst;
     InformationPopup mInformationPopup;
     @Override
@@ -27,29 +25,15 @@ public class CareerFinderFragment extends UosFragment{
 
     public void init(){
         isFirst = SessionUtils.getBoolean(getContext(), "career_result", false);
-        if(isFirst) {
+        if(!isFirst) {
             firstPopupInit();
         }else {
             reStartPopupInit();
         }
     }
+    ConfirmPopup restartPopup;
     private void reStartPopupInit(){
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-
-        dialog.setMessage("기존 검사 결과가 있습니다.\n검사를 다시하시겠습니까? ");
-        dialog.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        dialog.setNegativeButton("예", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startCareerFindTest();
-            }
-        });
-        dialog.show();
+        restartPopup = new ConfirmPopup(getContext(), getString(R.string.career_restart_popup),restartListener);
     }
     private void firstPopupInit(){
         mInformationPopup = new InformationPopup(getContext(),informationListener);
@@ -67,6 +51,22 @@ public class CareerFinderFragment extends UosFragment{
                     startCareerFindTest();
                 }
             }
+        }
+    };
+
+    View.OnClickListener restartListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int id = v.getId();
+            switch (id) {
+                case R.id.yes:
+                    startCareerFindTest();
+                    break;
+                case R.id.no:
+                    // 기존 데이터 가져오기
+                    break;
+            }
+            restartPopup.dismiss();
         }
     };
 }

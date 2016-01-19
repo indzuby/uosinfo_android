@@ -11,12 +11,12 @@
         android:layout_height="284dp"
         android:layout_gravity="center"
         android:background="@drawable/career_popup_background"
-        android:elevation="4dp"
-        android:padding="24dp">
+        android:elevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="24dp"
             android:layout_above="@+id/footer"
             android:orientation="vertical">
 
@@ -77,11 +77,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:weightSum="2">
 
                 <TextView
                     android:id="@+id/cancel"
+                    android:padding="24dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -91,6 +91,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:padding="24dp"
                     android:id="@+id/next"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

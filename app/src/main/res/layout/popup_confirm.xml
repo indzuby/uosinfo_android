@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/layout"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="280dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:elevation="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/contents"
+            android:layout_width="match_parent"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:lineSpacingExtra="4dp"
+            android:text="단어를 선택하지 않았습니다.\n정말 다음으로 진행합니까?"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/no"
+                android:padding="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="아니오"
+                android:textColor="@color/career_popup_confirm"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/yes"
+                android:padding="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="네"
+                android:textColor="@color/career_popup_confirm"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
