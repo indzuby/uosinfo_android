@@ -2,132 +2,97 @@ package com.uos.uosinfo.domain;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import com.parse.ParseClassName;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.Date;
 
 /**
  * Created by 주현 on 2016-01-10.
  */
-@DatabaseTable(tableName = "great_man")
-public class GreatMan {
-    @DatabaseField(columnName ="object_id",id = true)
-    String objectId;
-    @DatabaseField
-    String name;
-    @DatabaseField
-    String image;
-    @DatabaseField
-    String book;
-    @DatabaseField(columnName = "title_ko")
-    String titleKo;
-    @DatabaseField(columnName = "title_en")
-    String titleEn;
-    @DatabaseField(columnName = "wiki_ko")
-    String wikiKo;
-    @DatabaseField(columnName = "wiki_en")
-    String wikiEn;
-    @DatabaseField(columnName = "field_ko")
-    String fieldKo;
-    @DatabaseField(columnName = "field_en")
-    String fieldEn;
-    @DatabaseField(columnName = "college",foreign = true)
-    College college;
-    @DatabaseField(columnName = "create_datetime")
-    Date createDatetime;
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
-
+@ParseClassName("GreatMan")
+public class GreatMan extends ParseObject{
     public String getName() {
-        return name;
+        return getString("name");
     }
 
     public void setName(String name) {
-        this.name = name;
+        put("name",name);
     }
 
     public String getImage() {
-        return image;
+        return getString("image");
     }
 
     public void setImage(String image) {
-        this.image = image;
+        put("image",image);
     }
 
     public String getBook() {
-        return book;
+        return getString("book");
     }
 
     public void setBook(String book) {
-        this.book = book;
+        put("book",book);
     }
 
     public String getTitleKo() {
-        return titleKo;
+        return getString("titleKo");
     }
 
     public void setTitleKo(String titleKo) {
-        this.titleKo = titleKo;
+        put("titleKo",titleKo);
     }
 
     public String getTitleEn() {
-        return titleEn;
+        return getString("titleEn");
     }
 
     public void setTitleEn(String titleEn) {
-        this.titleEn = titleEn;
+        put("titleEn",titleEn);
     }
 
     public String getWikiKo() {
-        return wikiKo;
+        return getString("wikiKo");
     }
 
     public void setWikiKo(String wikiKo) {
-        this.wikiKo = wikiKo;
+        put("wikiKo",wikiKo);
     }
 
     public String getWikiEn() {
-        return wikiEn;
+        return getString("wikiEn");
     }
 
     public void setWikiEn(String wikiEn) {
-        this.wikiEn = wikiEn;
+        put("wikiEn",wikiEn);
     }
 
     public String getFieldKo() {
-        return fieldKo;
+        return getString("fieldKo");
     }
 
     public void setFieldKo(String fieldKo) {
-        this.fieldKo = fieldKo;
+        put("fieldKo",fieldKo);
     }
 
     public String getFieldEn() {
-        return fieldEn;
+        return getString("fieldKo");
     }
 
     public void setFieldEn(String fieldEn) {
-        this.fieldEn = fieldEn;
+        put("fieldEn",fieldEn);
     }
 
-    public College getCollege() {
-        return college;
+    public College getCollege() throws ParseException {
+        ParseQuery<College> query = ParseQuery.getQuery(College.class);
+        query.fromPin();
+        return query.get(getParseObject("college").getObjectId());
     }
 
     public void setCollege(College college) {
-        this.college = college;
-    }
-
-    public Date getCreateDatetime() {
-        return createDatetime;
-    }
-
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+        put("college",college);
     }
 }

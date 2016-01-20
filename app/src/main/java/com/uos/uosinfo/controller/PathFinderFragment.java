@@ -24,7 +24,6 @@ import com.uos.uosinfo.controller.pathfinder.PathFinderItemFragment;
 import com.uos.uosinfo.ui.PagerPoint;
 import com.uos.uosinfo.utils.BgUtils;
 import com.uos.uosinfo.utils.JsonUtils;
-import com.uos.uosinfo.utils.ParseUtils;
 
 import org.joda.time.DateTime;
 
@@ -88,15 +87,17 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
         });
     }
     void getPathFinderThisMonthByDataBase(){
-        mPath = mDataBaseUtils.selectPathFinderThisMonth();
-        setFragments();
-        mAdapter = new PathFinderAdapter(getChildFragmentManager(),getContext(), mFragments);
-        mViewPager.setAdapter(mAdapter);
-        if(mPath.size()<=0)
-            getPathFinderThisMonthByParse();
-        else
-            changeData();
+        mDataBaseUtils.getPathFinderByParse(new Date(), pinThisCallback, true);
 
+    }
+    void getPathFinderLastMonthByDataBase(){
+        mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(), pinLastCallback, true);
+    }
+    void getPathFinderThisMonthByParse(){
+        mDataBaseUtils.getPathFinderByParse(new Date(), networkCallback,false);
+    }
+    void getPathFinderLastMonthByParse(){
+        mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(), networkCallback,false);
     }
     private void setFragments(){
         mFragments.clear();
@@ -108,39 +109,50 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
             mFragments.add(fragment);
         }
     }
-    void getPathFinderLastMonthByDataBase(){
-        mPath = mDataBaseUtils.selectPathFinderLastMonth();
-        if(mPath.size()<=0)
-            getPathFinderLastMonthByParse();
-        else
-            changeData();
-    }
-    void getPathFinderThisMonthByParse(){
-        mDataBaseUtils.getPathFinderByParse(new Date(), thisCallback);
-    }
-    void getPathFinderLastMonthByParse(){
-        mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(),lastCallback);
-    }
-    FindCallback<ParseObject> thisCallback = new FindCallback<ParseObject>() {
+    FindCallback<PathFinder> pinThisCallback = new FindCallback<PathFinder>() {
         @Override
-        public void done(List<ParseObject> pathFinders, ParseException e) {
+        public void done(List<PathFinder> pathFinders, ParseException e) {
             if (e == null) {
                 Log.e("TAG", pathFinders.size() + "");
-                mPath = ParseUtils.parsePathFinders(pathFinders);
-                mDataBaseUtils.insertPathFinders(mPath);
-                changeData();
+                mPath = pathFinders;
+                setFragments();
+                mAdapter = new PathFinderAdapter(getChildFragmentManager(),getContext(), mFragments);
+                mViewPager.setAdapter(mAdapter);
+                if(mPath==null || mPath.isEmpty())
+                    getPathFinderThisMonthByParse();
+                else
+                    changeData();
             } else {
                 Log.e("TAG", "Error: " + e.getMessage());
             }
         }
     };
-    FindCallback<ParseObject> lastCallback = new FindCallback<ParseObject>() {
+    FindCallback<PathFinder> pinLastCallback = new FindCallback<PathFinder>() {
         @Override
-        public void done(List<ParseObject> pathFinders, ParseException e) {
+        public void done(List<PathFinder> pathFinders, ParseException e) {
             if (e == null) {
                 Log.e("TAG", pathFinders.size() + "");
-                mPath = ParseUtils.parsePathFinders(pathFinders);
-                mDataBaseUtils.insertPathFinders(mPath);
+                mPath = pathFinders;
+                if(mPath==null || mPath.isEmpty())
+                    getPathFinderLastMonthByParse();
+                else
+                    changeData();
+            } else {
+                Log.e("TAG", "Error: " + e.getMessage());
+            }
+        }
+    };
+    FindCallback<PathFinder> networkCallback = new FindCallback<PathFinder>() {
+        @Override
+        public void done(List<PathFinder> pathFinders, ParseException e) {
+            if (e == null) {
+                Log.e("TAG", pathFinders.size() + "");
+                mPath = pathFinders;
+                try {
+                    ParseObject.pinAll(pathFinders);
+                }catch (ParseException e2) {
+                    e2.printStackTrace();
+                }
                 changeData();
             } else {
                 Log.e("TAG", "Error: " + e.getMessage());

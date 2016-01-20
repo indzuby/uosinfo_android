@@ -2,72 +2,45 @@ package com.uos.uosinfo.domain;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
 
 import java.util.Date;
 
 /**
  * Created by user on 2016-01-07.
  */
-@DatabaseTable(tableName = "library")
-public class Library {
-
-    @DatabaseField(columnName ="object_id",id = true)
-    String objectId;
-    @DatabaseField
-    String title;
-    @DatabaseField(columnName = "create_datetime")
-    Date createDatetime;
-    @DatabaseField
-    String url;
-    @DatabaseField
-    String content;
-    @DatabaseField(columnName = "is_new")
-    boolean isNew;
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
-
+@ParseClassName("Library")
+public class Library extends ParseObject{
     public String getTitle() {
-        return title;
+        return getString("title");
     }
 
     public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getCreateDatetime() {
-        return createDatetime;
-    }
-
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+        put("title",title);
     }
 
     public String getUrl() {
-        return url;
+        return getString("url");
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        put("url",url);
     }
 
     public String getContent() {
-        return content;
+        return getString("content");
     }
 
     public void setContent(String content) {
-        this.content = content;
+        put("content",content);
     }
 
     public boolean isNew() {
-        return isNew;
+        return getBoolean("isNew");
     }
 
     public void setIsNew(boolean isNew) {
-        this.isNew = isNew;
+        put("isNew",isNew);
     }
 }

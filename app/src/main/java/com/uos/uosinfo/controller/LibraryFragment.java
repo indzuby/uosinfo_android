@@ -15,8 +15,8 @@ import com.uos.uosinfo.adapter.LibraryAdapter;
 import com.uos.uosinfo.database.DataBaseUtils;
 import com.uos.uosinfo.domain.Library;
 import com.uos.uosinfo.main.UosFragment;
-import com.uos.uosinfo.utils.ParseUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,23 +33,39 @@ public class LibraryFragment extends UosFragment {
         mView = inflater.inflate(R.layout.activity_library,container,false);
         return mView;
     }
-
+    public Date getLastDate(){
+        if(list==null || list.isEmpty())
+            return null;
+        return list.get(list.size()-1).getCreatedAt();
+    }
     public void init(){
         mDataBaseUtils = new DataBaseUtils(getContext());
         mListView = (ListView) mView.findViewById(R.id.listView);
 
-        list = mDataBaseUtils.selectLibraries();
-        adapter = new LibraryAdapter(getActivity(),list);
-        mListView.setAdapter(adapter);
-
-        mDataBaseUtils.getMoreLibrary(new FindCallback<ParseObject>() {
+        mDataBaseUtils.selectLibraries(new FindCallback<Library>() {
             @Override
-            public void done(List<ParseObject> libraries, ParseException e) {
+            public void done(List<Library> objects, ParseException e) {
+                list = objects;
+                adapter = new LibraryAdapter(getActivity(), list);
+                mListView.setAdapter(adapter);
+                getMoreLibrary();
+
+            }
+        });
+    }
+    public void getMoreLibrary(){
+        Date lastDate = getLastDate();
+        mDataBaseUtils.getMoreLibrary(new FindCallback<Library>() {
+            @Override
+            public void done(List<Library> libraries, ParseException e) {
                 if (e == null) {
                     Log.e("TAG", libraries.size() + "");
-                    List<Library> newList = ParseUtils.parseLibrary(libraries);
-                    mDataBaseUtils.insertLibraries(newList);
-                    for (Library library : newList) {
+                    try {
+                        ParseObject.pinAll(libraries);
+                    }catch (ParseException e2) {
+                        e2.printStackTrace();
+                    }
+                    for (Library library : libraries) {
                         int index = getIndexItem(library.getObjectId());
                         if(index == -1)
                             list.add(0, library);
@@ -61,8 +77,9 @@ public class LibraryFragment extends UosFragment {
                     Log.e("TAG", "Error: " + e.getMessage());
                 }
             }
-        });
+        },lastDate);
     }
+
     public int getIndexItem(String objectId) {
         for (int i=0;i<list.size();i++ ) {
             Library library = list.get(i);

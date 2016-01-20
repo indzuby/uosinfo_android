@@ -1,6 +1,7 @@
 package com.uos.uosinfo.database;
 
 import android.content.Context;
+import android.graphics.Path;
 
 import com.parse.FindCallback;
 import com.parse.ParseObject;
@@ -20,82 +21,33 @@ import java.util.List;
  */
 public class DataBaseUtils {
     Context mContext;
-    DataBaseHelper mHelper;
 
     public DataBaseUtils(Context context) {
         this.mContext = context;
-        mHelper = new DataBaseHelper(mContext);
     }
 
-    public void getMoreLibrary(FindCallback<ParseObject> callback) {
-        try {
-            Date lastDate = mHelper.lastLibraryCreateAt();
-            ParseQuery<ParseObject> query;
-            if (lastDate == null) {
-                query = ParseQuery.getQuery("Library").orderByAscending("createdAt");
-            } else {
-                query = ParseQuery.getQuery("Library").whereGreaterThan("updatedAt", lastDate).orderByAscending("createdAt");
-            }
-            query.findInBackground(callback);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public void getMoreLibrary(FindCallback<Library> callback, Date lastDate) {
+        ParseQuery<Library> query = ParseQuery.getQuery(Library.class);
+        if (lastDate == null) {
+            query = query.orderByAscending("createdAt");
+        } else {
+            query = query.whereGreaterThan("updatedAt", lastDate).orderByAscending("createdAt");
         }
+        query.findInBackground(callback);
     }
 
-    public void insertLibraries(List<Library> libraries) {
-        try {
-            for (Library library : libraries) {
-                if (mHelper.isExistLibrary(library.getObjectId()))
-                    mHelper.updateLibrary(library);
-                else
-                    mHelper.insertLibrary(library);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void selectLibraries(FindCallback<Library> callback) {
+        ParseQuery<Library> query = ParseQuery.getQuery(Library.class);
+        query = query.orderByAscending("createdAt");
+        query.fromPin();
+        query.findInBackground(callback);
     }
 
-    public List<Library> selectLibraries() {
-        try {
-            return mHelper.selectLibrary();
-        } catch (SQLException e) {
-            return new ArrayList<>();
-        }
-    }
-
-    public boolean hasPathFinderMonth() {
-        try {
-            return mHelper.hasPathFinderThisMonth(new Date());
-        } catch (SQLException e) {
-            return false;
-        }
-    }
-
-    public List<PathFinder> selectPathFinderThisMonth() {
-        return selectPathFinderByDate(new Date());
-    }
-    public void getPathFinderByParse(Date date,FindCallback<ParseObject> callback) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("PathFinder");
+    public void getPathFinderByParse(Date date,FindCallback<PathFinder> callback,boolean inPin) {
+        ParseQuery<PathFinder> query = ParseQuery.getQuery(PathFinder.class);
+        if(inPin)
+            query.fromPin();
         query.whereLessThanOrEqualTo("startDatetime",date).whereGreaterThanOrEqualTo("endDatetime",date).orderByAscending("displayOrder").findInBackground(callback);
-    }
-    public List<PathFinder> selectPathFinderLastMonth() {
-        return selectPathFinderByDate(new DateTime().minusMonths(1).toDate());
-    }
-    private List<PathFinder> selectPathFinderByDate(Date date) {
-        try {
-            return mHelper.selectPathFinderByDate(date);
-        } catch (SQLException e) {
-            return new ArrayList<>();
-        }
-    }
-    public void insertPathFinders(List<PathFinder> pathFinders) {
-        try {
-            for (PathFinder finder : pathFinders) {
-                mHelper.insertPathFinder(finder);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
 }

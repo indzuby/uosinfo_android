@@ -2,52 +2,31 @@ package com.uos.uosinfo.domain;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
 
 import java.util.Date;
 
 /**
  * Created by user on 2016-01-20.
  */
-@DatabaseTable(tableName = "qna")
-public class QnaBoard {
-    @DatabaseField(columnName = "object_id",id = true)
-    String objectId;
-    @DatabaseField
-    String question;
-    @DatabaseField
-    String answer;
-    @DatabaseField(columnName = "create_datetime")
-    Date createDatetime;
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
+@ParseClassName("QnABoard")
+public class QnaBoard extends ParseObject{
 
     public String getQuestion() {
-        return question;
+        return getString("question");
     }
 
     public void setQuestion(String question) {
-        this.question = question;
+        put("question",question);
     }
 
     public String getAnswer() {
-        return answer;
+        return getString("answer");
     }
 
     public void setAnswer(String answer) {
-        this.answer = answer;
+        put("answer",answer);
     }
 
-    public Date getCreateDatetime() {
-        return createDatetime;
-    }
-
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
-    }
 }
