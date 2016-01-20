@@ -6,23 +6,23 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
 
 /**
- * Created by user on 2016-01-07.
+ * Created by user on 2016-01-20.
  */
-@DatabaseTable(tableName = "library")
-public class Library {
-
-    @DatabaseField(columnName ="object_id",id = true)
+@DatabaseTable(tableName = "notice")
+public class Notice {
+    @DatabaseField(columnName = "object_id",id = true)
     String objectId;
     @DatabaseField
     String title;
-    @DatabaseField(columnName = "create_datetime")
-    Date createDatetime;
-    @DatabaseField
-    String url;
     @DatabaseField
     String content;
+    @DatabaseField
+    String url;
     @DatabaseField(columnName = "is_new")
-    boolean isNew;
+    Boolean isNew;
+    @DatabaseField(columnName = "create_datetime")
+    Date createDatetime;
+
     public String getObjectId() {
         return objectId;
     }
@@ -39,12 +39,12 @@ public class Library {
         this.title = title;
     }
 
-    public Date getCreateDatetime() {
-        return createDatetime;
+    public String getContent() {
+        return content;
     }
 
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getUrl() {
@@ -55,19 +55,19 @@ public class Library {
         this.url = url;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public boolean isNew() {
+    public Boolean getIsNew() {
         return isNew;
     }
 
-    public void setIsNew(boolean isNew) {
+    public void setIsNew(Boolean isNew) {
         this.isNew = isNew;
+    }
+
+    public Date getCreateDatetime() {
+        return createDatetime;
+    }
+
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
     }
 }

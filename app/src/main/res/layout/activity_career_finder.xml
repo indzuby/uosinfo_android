@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center"
     android:background="@mipmap/findyourpath_bg"
     android:layout_height="match_parent">
+    <include android:id="@+id/header" layout="@layout/element_career_word_header"/>
     <ListView
-        android:id="@+id/list_view"
+        android:layout_below="@+id/header"
+        android:id="@+id/word_list"
         android:layout_width="match_parent"
-        android:dividerHeight="0dp"
+        android:dividerHeight="6dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         android:divider="@null"
-        android:paddingRight="8dp"
-        android:paddingLeft="8dp"
+        android:layout_above="@+id/footer"
         android:layout_height="match_parent">
     </ListView>
-</LinearLayout>
+    <include android:id="@+id/footer"
+        layout="@layout/element_career_word_footer"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+</RelativeLayout>

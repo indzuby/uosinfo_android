@@ -54,8 +54,8 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
         ImageView image = (ImageView) mView.findViewById(R.id.path_finder_image);
         mTitle = (TextView) mView.findViewById(R.id.path_finder_title);
         TextView person = (TextView) mView.findViewById(R.id.path_finder_person);
-        Glide.with(getActivity()).load(mPass.getImage()).fitCenter().crossFade().into(image);
-        person.setText(mPass.getName());
+//        Glide.with(getActivity()).load(mPass.getImage()).fitCenter().crossFade().into(image);
+//        person.setText(mPass.getName());
 
     }
 
@@ -72,16 +72,16 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
 
     public void setLanguage(boolean language){
         if(language) {
-            mTitle.setText(mPass.getTitleKo());
-            mCollege.setText(mPass.getCollegeKo());
-            mField.setText(mPass.getFieldKo());
+//            mTitle.setText(mPass.getTitleKo());
+//            mCollege.setText(mPass.getCollegeKo());
+//            mField.setText(mPass.getFieldKo());
             mWikiKo.setText("위키백과(국문)");
             mWikiEn.setText("위키백과(영문)");
             mBook.setText("구글북스 검색결과");
         }else {
-            mTitle.setText(mPass.getTitleEn());
-            mCollege.setText(mPass.getCollegeEn());
-            mField.setText(mPass.getFieldEn());
+//            mTitle.setText(mPass.getTitleEn());
+//            mCollege.setText(mPass.getCollegeEn());
+//            mField.setText(mPass.getFieldEn());
             mWikiKo.setText("wikipedia.org(ko)");
             mWikiEn.setText("wikipedia.org(en)");
             mBook.setText("Google Books Search Results");
@@ -121,19 +121,19 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
                 mfFloatingArrowPopup.setLastButton(((PathFinderFragment) getParentFragment()).isThisMonth());
                 break;
             case R.id.path_finder_wiki_en:
-                uri = Uri.parse(mPass.getWikiEn());
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(launchBrowser);
+//                uri = Uri.parse(mPass.getWikiEn());
+//                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(launchBrowser);
                 break;
             case R.id.path_finder_wiki_ko:
-                uri = Uri.parse(mPass.getWikiKo());
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(launchBrowser);
+//                uri = Uri.parse(mPass.getWikiKo());
+//                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(launchBrowser);
                 break;
             case R.id.path_finder_book:
-                uri = Uri.parse(mPass.getBook());
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(launchBrowser);
+//                uri = Uri.parse(mPass.getBook());
+//                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(launchBrowser);
                 break;
         }
     }

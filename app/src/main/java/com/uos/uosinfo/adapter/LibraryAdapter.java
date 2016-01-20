@@ -59,9 +59,8 @@ public class LibraryAdapter extends BaseAdapter{
 
         final Library library=  getItem(position);
 
-        DateTime date = new DateTime();
         newIcon.setVisibility(View.GONE);
-        if(Math.abs(Days.daysBetween(date,new DateTime(library.getCreateDatetime())).getDays())<=3)
+        if(library.isNew())
             newIcon.setVisibility(View.VISIBLE);
         title.setText(library.getTitle());
         download.setOnClickListener(new View.OnClickListener() {

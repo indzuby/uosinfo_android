@@ -16,19 +16,8 @@ public class ParseUtils {
         List<PathFinder> pathFinders = new ArrayList<>();
         for(ParseObject object : pass) {
             PathFinder pathFinder = new PathFinder();
-            pathFinder.setName(object.getString("name"));
-            pathFinder.setBook(object.getString("book"));
-            pathFinder.setImage(object.getString("image"));
             pathFinder.setStartDatetime(object.getDate("startDatetime"));
             pathFinder.setEndDatetime(object.getDate("endDatetime"));
-            pathFinder.setCollegeKo(object.getString("collegeKo"));
-            pathFinder.setFieldKo(object.getString("fieldKo"));
-            pathFinder.setTitleKo(object.getString("titleKo"));
-            pathFinder.setWikiKo(object.getString("wikiKo"));
-            pathFinder.setCollegeEn(object.getString("collegeEn"));
-            pathFinder.setFieldEn(object.getString("fieldEn"));
-            pathFinder.setTitleEn(object.getString("titleEn"));
-            pathFinder.setWikiEn(object.getString("wikiEn"));
             pathFinder.setObjectId(object.getObjectId());
             pathFinder.setDisplayOrder(object.getInt("displayOrder"));
             pathFinders.add(pathFinder);
@@ -44,6 +33,7 @@ public class ParseUtils {
             library.setUrl(object.getString("url"));
             library.setContent(object.getString("content"));
             library.setObjectId(object.getObjectId());
+            library.setIsNew(object.getBoolean("new"));
             lib.add(library);
         }
         return lib;
