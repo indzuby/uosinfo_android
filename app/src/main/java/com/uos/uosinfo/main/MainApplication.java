@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseAnalytics;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 import com.tsengvn.typekit.Typekit;
@@ -32,6 +33,7 @@ public class MainApplication extends Application {
         // defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
         ParseInstallation.getCurrentInstallation().saveInBackground();
+
     }
 
     @Override

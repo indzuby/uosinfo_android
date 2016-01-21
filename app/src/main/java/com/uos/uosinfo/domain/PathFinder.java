@@ -1,7 +1,5 @@
 package com.uos.uosinfo.domain;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -13,7 +11,7 @@ import java.util.Date;
  * Created by 주현 on 2016-01-10.
  */
 @ParseClassName("PathFinder")
-public class PathFinder extends ParseObject{
+public class PathFinder extends ParseObject {
 
 
     public Date getStartDatetime() {
@@ -21,7 +19,7 @@ public class PathFinder extends ParseObject{
     }
 
     public void setStartDatetime(Date startDatetime) {
-        put("startDatetime",startDatetime);
+        put("startDatetime", startDatetime);
     }
 
     public Date getEndDatetime() {
@@ -29,7 +27,7 @@ public class PathFinder extends ParseObject{
     }
 
     public void setEndDatetime(Date endDatetime) {
-        put("endDatetime",endDatetime);
+        put("endDatetime", endDatetime);
     }
 
     public Integer getDisplayOrder() {
@@ -37,17 +35,23 @@ public class PathFinder extends ParseObject{
     }
 
     public void setDisplayOrder(Integer displayOrder) {
-        put("displayOrder",displayOrder);
+        put("displayOrder", displayOrder);
     }
 
-    public GreatMan getGreatMan() throws ParseException{
-        ParseQuery<GreatMan> query = ParseQuery.getQuery(GreatMan.class);
-        query.fromPin();
-        return query.get(getParseObject("greatMan").getObjectId());
+    public Celebrity getGreatMan(){
+        try {
+            ParseQuery<Celebrity> query = ParseQuery.getQuery(Celebrity.class);
+            query.fromPin();
+            return query.get(getParseObject("celebrity").getObjectId());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
 
     }
 
-    public void setGreatMan(GreatMan greatMan) {
-        put("greatMan",greatMan);
+    public void setGreatMan(Celebrity celebrity) {
+        put("celebrity", celebrity);
     }
 }

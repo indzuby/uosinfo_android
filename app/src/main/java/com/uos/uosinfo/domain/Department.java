@@ -13,14 +13,14 @@ import java.util.Date;
  * Created by user on 2016-01-20.
  */
 @ParseClassName("Department")
-public class Department extends ParseObject{
+public class Department extends ParseObject {
 
     public Integer getNumber() {
         return getInt("number");
     }
 
     public void setNumber(Integer number) {
-        put("number",number);
+        put("number", number);
     }
 
     public String getName() {
@@ -28,7 +28,7 @@ public class Department extends ParseObject{
     }
 
     public void setName(String name) {
-        put("name",name);
+        put("name", name);
     }
 
     public String getIntroduction() {
@@ -36,7 +36,7 @@ public class Department extends ParseObject{
     }
 
     public void setIntroduction(String introduction) {
-        put("introduction",introduction);
+        put("introduction", introduction);
     }
 
     public String getRightPeople() {
@@ -44,7 +44,7 @@ public class Department extends ParseObject{
     }
 
     public void setRightPeople(String rightPeople) {
-        put("rightPeople",rightPeople);
+        put("rightPeople", rightPeople);
     }
 
     public String getPhone() {
@@ -52,7 +52,7 @@ public class Department extends ParseObject{
     }
 
     public void setPhone(String phone) {
-        put("phone",phone);
+        put("phone", phone);
     }
 
     public String getUrl() {
@@ -60,17 +60,22 @@ public class Department extends ParseObject{
     }
 
     public void setUrl(String url) {
-        put("url",url);
+        put("url", url);
     }
 
 
-    public College getCollege() throws ParseException{
-        ParseQuery<College> query = ParseQuery.getQuery(College.class);
-        query.fromPin();
-        return query.get(getParseObject("college").getObjectId());
+    public College getCollege() {
+        try {
+            ParseQuery<College> query = ParseQuery.getQuery(College.class);
+            query.fromPin();
+            return query.get(getParseObject("college").getObjectId());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setCollege(College college) {
-        put("college",college);
+        put("college", college);
     }
 }

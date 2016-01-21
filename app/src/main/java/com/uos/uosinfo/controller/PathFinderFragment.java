@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.uos.uosinfo.R;
@@ -101,7 +102,7 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
     }
     private void setFragments(){
         mFragments.clear();
-        for(PathFinder pathFinder : mPath) {
+        for(ParseObject pathFinder : mPath) {
             Fragment fragment = new PathFinderItemFragment();
             Bundle bundle = new Bundle();
             bundle.putString("pathFinder", JsonUtils.objectToJson(pathFinder));

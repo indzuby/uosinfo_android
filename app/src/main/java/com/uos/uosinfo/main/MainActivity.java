@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.ParseAnalytics;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.adapter.TabPagerAdapter;
 import com.uos.uosinfo.ui.MainViewPager;
@@ -16,7 +17,6 @@ public class MainActivity extends BaseAcitvity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");

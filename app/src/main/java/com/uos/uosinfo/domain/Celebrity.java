@@ -12,8 +12,8 @@ import java.util.Date;
 /**
  * Created by 주현 on 2016-01-10.
  */
-@ParseClassName("GreatMan")
-public class GreatMan extends ParseObject{
+@ParseClassName("Celebrity")
+public class Celebrity extends ParseObject{
     public String getName() {
         return getString("name");
     }
@@ -86,10 +86,15 @@ public class GreatMan extends ParseObject{
         put("fieldEn",fieldEn);
     }
 
-    public College getCollege() throws ParseException {
-        ParseQuery<College> query = ParseQuery.getQuery(College.class);
-        query.fromPin();
-        return query.get(getParseObject("college").getObjectId());
+    public College getCollege() {
+        try{
+            ParseQuery<College> query = ParseQuery.getQuery(College.class);
+            query.fromPin();
+            return query.get(getParseObject("college").getObjectId());
+        }catch (ParseException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setCollege(College college) {
