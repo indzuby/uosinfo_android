@@ -1,13 +1,9 @@
 package com.uos.uosinfo.domain;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
-import java.util.Date;
 
 /**
  * Created by 주현 on 2016-01-10.
@@ -86,11 +82,13 @@ public class Celebrity extends ParseObject{
         put("fieldEn",fieldEn);
     }
 
+    College college;
     public College getCollege() {
+        if(college!=null) return college;
         try{
             ParseQuery<College> query = ParseQuery.getQuery(College.class);
             query.fromPin();
-            return query.get(getParseObject("college").getObjectId());
+            return (college = query.get(getParseObject("college").getObjectId()));
         }catch (ParseException e){
             e.printStackTrace();
             return null;
@@ -98,6 +96,7 @@ public class Celebrity extends ParseObject{
     }
 
     public void setCollege(College college) {
+        this.college = college;
         put("college",college);
     }
 }

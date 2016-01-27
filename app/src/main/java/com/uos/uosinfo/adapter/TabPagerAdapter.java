@@ -81,25 +81,30 @@ public class TabPagerAdapter extends FragmentPagerAdapter{
                 if(mPath !=null && !initPath) {
                     initPath = true;
                 }
+                break;
             case 1:
                 if(mCareer !=null) {
                     mCareer.init();
                 }
+                break;
             case 2:
                 if(mQna !=null  && !initQna) {
                     mQna.init();
                     initQna = true;
                 }
+                break;
             case 3:
                 if(mInfo !=null && !initInfo) {
                     mInfo.init();
                     initInfo = true;
                 }
+                break;
             case 4:
                 if(mLibrary !=null && !initLibrary) {
                     mLibrary.init();
                     initLibrary = true;
                 }
+                break;
         }
     }
 }

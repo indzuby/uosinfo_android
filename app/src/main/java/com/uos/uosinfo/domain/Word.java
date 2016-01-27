@@ -1,13 +1,9 @@
 package com.uos.uosinfo.domain;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
-import java.util.Date;
 
 /**
  * Created by user on 2016-01-20.
@@ -23,11 +19,14 @@ public class Word extends ParseObject {
         put("word", word);
     }
 
+    College college1;
     public College getCollege1() {
+        if(college1 !=null)
+            return college1;
         try {
             ParseQuery<College> query = ParseQuery.getQuery(College.class);
             query.fromPin();
-            return query.get(getParseObject("college1").getObjectId());
+            return (college1 = query.get(getParseObject("college1").getObjectId()));
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -39,11 +38,14 @@ public class Word extends ParseObject {
         put("college1", college1);
     }
 
+    College college2 ;
     public College getCollege2(){
+        if(college2!=null)
+            return college2;
         try {
             ParseQuery<College> query = ParseQuery.getQuery(College.class);
             query.fromPin();
-            return query.get(getParseObject("college2").getObjectId());
+            return (college2 = query.get(getParseObject("college2").getObjectId()));
 
         } catch (ParseException e) {
             e.printStackTrace();

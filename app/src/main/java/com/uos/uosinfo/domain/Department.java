@@ -1,13 +1,9 @@
 package com.uos.uosinfo.domain;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
-import java.util.Date;
 
 /**
  * Created by user on 2016-01-20.
@@ -64,18 +60,21 @@ public class Department extends ParseObject {
     }
 
 
+    College college;
     public College getCollege() {
-        try {
+        if(college!=null) return college;
+        try{
             ParseQuery<College> query = ParseQuery.getQuery(College.class);
             query.fromPin();
-            return query.get(getParseObject("college").getObjectId());
-        } catch (ParseException e) {
+            return (college = query.get(getParseObject("college").getObjectId()));
+        }catch (ParseException e){
             e.printStackTrace();
             return null;
         }
     }
 
     public void setCollege(College college) {
-        put("college", college);
+        this.college = college;
+        put("college",college);
     }
 }

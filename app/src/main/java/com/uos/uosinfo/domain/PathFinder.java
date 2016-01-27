@@ -14,6 +14,10 @@ import java.util.Date;
 public class PathFinder extends ParseObject {
 
 
+    public PathFinder(){
+        super();
+    }
+
     public Date getStartDatetime() {
         return getDate("startDatetime");
     }
@@ -38,11 +42,15 @@ public class PathFinder extends ParseObject {
         put("displayOrder", displayOrder);
     }
 
-    public Celebrity getGreatMan(){
+    Celebrity celebrity;
+    public Celebrity getCelebrity(){
+        celebrity = celebrity;
+        if(celebrity !=null)
+            return celebrity;
         try {
             ParseQuery<Celebrity> query = ParseQuery.getQuery(Celebrity.class);
             query.fromPin();
-            return query.get(getParseObject("celebrity").getObjectId());
+            return (celebrity = query.get(getParseObject("celebrity").getObjectId()));
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -51,7 +59,7 @@ public class PathFinder extends ParseObject {
 
     }
 
-    public void setGreatMan(Celebrity celebrity) {
+    public void setCelebrity(Celebrity celebrity) {
         put("celebrity", celebrity);
     }
 }

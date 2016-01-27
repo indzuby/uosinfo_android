@@ -1,6 +1,5 @@
 package com.uos.uosinfo.domain;
 
-import com.j256.ormlite.field.DatabaseField;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -11,11 +10,14 @@ import com.parse.ParseQuery;
  */
 @ParseClassName("ResultPathFinder")
 public class ResultPathFinder extends ParseObject {
+    Celebrity celebrity;
     public Celebrity getCelebrity() {
+        if(celebrity !=null)
+            return celebrity;
         try {
             ParseQuery<Celebrity> query = ParseQuery.getQuery(Celebrity.class);
             query.fromPin();
-            return query.get(getParseObject("celebrity").getObjectId());
+            return (celebrity = query.get(getParseObject("celebrity").getObjectId()));
 
         } catch (ParseException e) {
             e.printStackTrace();

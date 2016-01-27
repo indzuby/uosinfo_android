@@ -3,7 +3,6 @@ package com.uos.uosinfo.controller;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +10,17 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.adapter.PathFinderAdapter;
-import com.uos.uosinfo.database.DataBaseUtils;
+import com.uos.uosinfo.controller.pathfinder.PathFinderItemFragment;
 import com.uos.uosinfo.domain.PathFinder;
 import com.uos.uosinfo.main.FloatingPopup;
 import com.uos.uosinfo.main.UosFragment;
-import com.uos.uosinfo.controller.pathfinder.PathFinderItemFragment;
 import com.uos.uosinfo.ui.PagerPoint;
 import com.uos.uosinfo.utils.BgUtils;
-import com.uos.uosinfo.utils.JsonUtils;
+import com.uos.uosinfo.utils.DataBaseUtils;
 
 import org.joda.time.DateTime;
 
@@ -64,7 +60,7 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
         mDataBaseUtils = new DataBaseUtils(getContext());
         mPathFinderBg = (FrameLayout) mView.findViewById(R.id.path_finder_bg);
         mFloatingPlus = (ImageButton) mView.findViewById(R.id.plus_button);
-        mViewPager = (ViewPager) mView.findViewById(R.id.viewPager);
+        mViewPager = (ViewPager) mView.findViewById(R.id.pathfinder_view_pager);
         mOvalContainer = (LinearLayout) mView.findViewById(R.id.oval_container);
         mFloatingPlus.setOnClickListener(this);
         mFragments = new ArrayList<>();
@@ -88,78 +84,50 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
         });
     }
     void getPathFinderThisMonthByDataBase(){
-        mDataBaseUtils.getPathFinderByParse(new Date(), pinThisCallback, true);
-
+        mPath = mDataBaseUtils.getPathFinderByParse(new Date(), true);
+        setFragments();
+        mAdapter = new PathFinderAdapter(getChildFragmentManager(),getContext(), mFragments);
+        mViewPager.setAdapter(mAdapter);
+        if(mPath==null || mPath.isEmpty())
+            getPathFinderThisMonthByParse();
+        else
+            changeData();
     }
     void getPathFinderLastMonthByDataBase(){
-        mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(), pinLastCallback, true);
+        mPath = mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(), true);
+        if(mPath==null || mPath.isEmpty())
+            getPathFinderLastMonthByParse();
+        else
+            changeData();
     }
     void getPathFinderThisMonthByParse(){
-        mDataBaseUtils.getPathFinderByParse(new Date(), networkCallback,false);
+        mPath = mDataBaseUtils.getPathFinderByParse(new Date(),false);
+        try {
+            ParseObject.pinAll(mPath);
+        }catch (ParseException e2) {
+            e2.printStackTrace();
+        }
+        changeData();
     }
     void getPathFinderLastMonthByParse(){
-        mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(), networkCallback,false);
+        mPath = mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(),false);
+        try {
+            ParseObject.pinAll(mPath);
+        }catch (ParseException e2) {
+            e2.printStackTrace();
+        }
+        changeData();
     }
     private void setFragments(){
         mFragments.clear();
         for(ParseObject pathFinder : mPath) {
             Fragment fragment = new PathFinderItemFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("pathFinder", JsonUtils.objectToJson(pathFinder));
+            bundle.putString("objectId", pathFinder.getObjectId());
             fragment.setArguments(bundle);
             mFragments.add(fragment);
         }
     }
-    FindCallback<PathFinder> pinThisCallback = new FindCallback<PathFinder>() {
-        @Override
-        public void done(List<PathFinder> pathFinders, ParseException e) {
-            if (e == null) {
-                Log.e("TAG", pathFinders.size() + "");
-                mPath = pathFinders;
-                setFragments();
-                mAdapter = new PathFinderAdapter(getChildFragmentManager(),getContext(), mFragments);
-                mViewPager.setAdapter(mAdapter);
-                if(mPath==null || mPath.isEmpty())
-                    getPathFinderThisMonthByParse();
-                else
-                    changeData();
-            } else {
-                Log.e("TAG", "Error: " + e.getMessage());
-            }
-        }
-    };
-    FindCallback<PathFinder> pinLastCallback = new FindCallback<PathFinder>() {
-        @Override
-        public void done(List<PathFinder> pathFinders, ParseException e) {
-            if (e == null) {
-                Log.e("TAG", pathFinders.size() + "");
-                mPath = pathFinders;
-                if(mPath==null || mPath.isEmpty())
-                    getPathFinderLastMonthByParse();
-                else
-                    changeData();
-            } else {
-                Log.e("TAG", "Error: " + e.getMessage());
-            }
-        }
-    };
-    FindCallback<PathFinder> networkCallback = new FindCallback<PathFinder>() {
-        @Override
-        public void done(List<PathFinder> pathFinders, ParseException e) {
-            if (e == null) {
-                Log.e("TAG", pathFinders.size() + "");
-                mPath = pathFinders;
-                try {
-                    ParseObject.pinAll(pathFinders);
-                }catch (ParseException e2) {
-                    e2.printStackTrace();
-                }
-                changeData();
-            } else {
-                Log.e("TAG", "Error: " + e.getMessage());
-            }
-        }
-    };
     private void changeData(){
         mViewPager.setOffscreenPageLimit(mFragments.size() - 1);
         setFragments();

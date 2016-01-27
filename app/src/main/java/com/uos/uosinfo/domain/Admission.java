@@ -9,31 +9,39 @@ import com.parse.ParseQuery;
  * Created by user on 2016-01-21.
  */
 @ParseClassName("Admission")
-public class Admission extends ParseObject{
+public class Admission extends ParseObject {
 
     public String getUrl() {
         return getString("url");
     }
-    public void setUrl(String value){
-        put("url",value);
+
+    public void setUrl(String value) {
+        put("url", value);
     }
-    public String getContent(){
+
+    public String getContent() {
         return getString("rightPeople");
     }
-    public void setContent(String value){
-        put("content",value);
+
+    public void setContent(String value) {
+        put("content", value);
     }
+
+    Department department;
     public Department getDepartment(){
+        if(department !=null)
+            return department;
         try {
             ParseQuery<Department> query = ParseQuery.getQuery(Department.class);
             query.fromPin();
-            return query.get(getParseObject("department").getObjectId());
+            return (department = query.get(getParseObject("department").getObjectId()));
         }catch (ParseException e){
             e.printStackTrace();
             return null;
         }
     }
-    public void setDepartment(Department value){
-        put("department",value);
+
+    public void setDepartment(Department value) {
+        put("department", value);
     }
 }

@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:gravity="center"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:background="@mipmap/findyourpath_bg"
+    android:orientation="vertical"
     android:layout_height="match_parent">
-    <include android:id="@+id/header" layout="@layout/element_career_word_header"/>
-    <ListView
-        android:layout_below="@+id/header"
-        android:id="@+id/word_list"
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:dividerHeight="6dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
-        android:divider="@null"
-        android:layout_above="@+id/footer"
+        android:layout_height="match_parent"
+        android:id="@+id/word_container"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/element_career_word_header" />
+
+        <ListView
+            android:id="@+id/word_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/footer"
+            android:layout_below="@+id/header"
+            android:divider="@null"
+            android:dividerHeight="6dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"></ListView>
+
+        <include
+            android:id="@+id/footer"
+            layout="@layout/element_career_word_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/popup_container"
         android:layout_height="match_parent">
-    </ListView>
-    <include android:id="@+id/footer"
-        layout="@layout/element_career_word_footer"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
-</RelativeLayout>
+    <include layout="@layout/element_career_popup"/>
+    </LinearLayout>
+</LinearLayout>
