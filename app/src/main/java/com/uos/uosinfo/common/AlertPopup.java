@@ -36,10 +36,8 @@ public class AlertPopup extends Dialog implements View.OnClickListener{
     private void setLayout(){
         TextView contents = (TextView) findViewById(R.id.contents);
         TextView yes = (TextView) findViewById(R.id.yes);
-        TextView no = (TextView) findViewById(R.id.no);
 
         yes.setOnClickListener(mListener);
-        no.setOnClickListener(this);
 
         contents.setText(mContents);
         yes.setText(mYes);

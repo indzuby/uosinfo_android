@@ -6,6 +6,7 @@
 
     <ImageView
         android:layout_width="276dp"
+        android:id="@+id/path_finder_image"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/karl_popper" />
@@ -24,7 +25,6 @@
             android:layout_height="wrap_content"
             android:alpha="0.8"
             android:gravity="right"
-            android:text="˝the attempt to mkae invariably produces hell˝"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -35,17 +35,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="16dp"
-            android:text="Karl Popper"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/translate_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="40dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="138dp"
         android:background="@drawable/fab_arrow_mini_oval"
         android:elevation="1dp"
         android:src="@mipmap/ab_translate" />

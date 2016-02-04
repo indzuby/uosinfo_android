@@ -27,4 +27,17 @@ public class ResultPathFinder extends ParseObject {
     public void setCelebrity(Celebrity celebrity) {
         put("celebrity", celebrity);
     }
+
+    College college;
+    public College getCollege() {
+        if(college!=null) return college;
+        try{
+            ParseQuery<College> query = ParseQuery.getQuery(College.class);
+            query.fromPin();
+            return (college = query.get(getParseObject("college").getObjectId()));
+        }catch (ParseException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

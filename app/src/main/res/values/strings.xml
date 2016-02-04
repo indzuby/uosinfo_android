@@ -9,4 +9,8 @@
     <string name="career_restart_popup">기존 검사 결과가있습니다.\n검사를 다시하겠습니까?</string>
     <string name="career_result_popup">검사가 모두 완료되었습니다.\n감사합니다.</string>
     <string name="career_word_confirm">단어를 선택하지 않았습니다.\n정말 다음으로 진행합니까?</string>
+    <string name="career_people_en">Related People for your path</string>
+    <string name="career_people_kr">진로와 관련된 인물들</string>
+    <string name="career_recommend_en">Recommended College for your path</string>
+    <string name="career_recommend_kr">진로와 관련된 추천 단과 대학</string>
 </resources>

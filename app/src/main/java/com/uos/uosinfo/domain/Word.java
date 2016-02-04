@@ -45,6 +45,8 @@ public class Word extends ParseObject {
         try {
             ParseQuery<College> query = ParseQuery.getQuery(College.class);
             query.fromPin();
+            if(getParseObject("college2") == null)
+                return null;
             return (college2 = query.get(getParseObject("college2").getObjectId()));
 
         } catch (ParseException e) {

@@ -13,6 +13,7 @@ import com.uos.uosinfo.domain.Admission;
 import com.uos.uosinfo.domain.Celebrity;
 import com.uos.uosinfo.domain.College;
 import com.uos.uosinfo.domain.Department;
+import com.uos.uosinfo.domain.DepartmentImage;
 import com.uos.uosinfo.domain.Library;
 import com.uos.uosinfo.domain.Notice;
 import com.uos.uosinfo.domain.PathFinder;
@@ -44,6 +45,7 @@ public class MainApplication extends Application {
         ParseObject.registerSubclass(Celebrity.class);
         ParseObject.registerSubclass(College.class);
         ParseObject.registerSubclass(Department.class);
+        ParseObject.registerSubclass(DepartmentImage.class);
         ParseObject.registerSubclass(Library.class);
         ParseObject.registerSubclass(Notice.class);
         ParseObject.registerSubclass(PathFinder.class);

@@ -13,15 +13,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.uos.uosinfo.R;
+import com.uos.uosinfo.common.PathFinderInterface;
 import com.uos.uosinfo.controller.PathFinderFragment;
-import com.uos.uosinfo.domain.Celebrity;
 import com.uos.uosinfo.domain.PathFinder;
 import com.uos.uosinfo.utils.DataBaseUtils;
 
 /**
  * Created by 주현 on 2016-01-10.
  */
-public class PathFinderItemFragment extends Fragment implements View.OnClickListener{
+public class PathFinderItemFragment extends Fragment implements View.OnClickListener,PathFinderInterface {
     private ImageButton mFloatingArrow;
     View mView;
     PathFinder mPath;
@@ -58,7 +58,6 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
         ImageView image = (ImageView) mView.findViewById(R.id.path_finder_image);
         mTitle = (TextView) mView.findViewById(R.id.path_finder_title);
         TextView person = (TextView) mView.findViewById(R.id.path_finder_person);
-        Celebrity celebrity = mPath.getCelebrity();
 
         Glide.with(getActivity())
                 .load(mPath.getCelebrity().getImage())
@@ -77,7 +76,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
         mWikiKo.setOnClickListener(this);
         mBook.setOnClickListener(this);
     }
-
+    @Override
     public void setLanguage(boolean language){
         if(language) {
             mTitle.setText(mPath.getCelebrity().getTitleKo());
@@ -129,19 +128,19 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
                 mfFloatingArrowPopup.setLastButton(((PathFinderFragment) getParentFragment()).isThisMonth());
                 break;
             case R.id.path_finder_wiki_en:
-//                uri = Uri.parse(mPath.getWikiEn());
-//                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
-//                startActivity(launchBrowser);
+                uri = Uri.parse(mPath.getCelebrity().getWikiEn());
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(launchBrowser);
                 break;
             case R.id.path_finder_wiki_ko:
-//                uri = Uri.parse(mPath.getWikiKo());
-//                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
-//                startActivity(launchBrowser);
+                uri = Uri.parse(mPath.getCelebrity().getWikiKo());
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(launchBrowser);
                 break;
             case R.id.path_finder_book:
-//                uri = Uri.parse(mPath.getBook());
-//                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
-//                startActivity(launchBrowser);
+                uri = Uri.parse(mPath.getCelebrity().getBook());
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(launchBrowser);
                 break;
         }
     }

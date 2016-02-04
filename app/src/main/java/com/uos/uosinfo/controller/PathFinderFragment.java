@@ -10,22 +10,17 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.adapter.PathFinderAdapter;
 import com.uos.uosinfo.controller.pathfinder.PathFinderItemFragment;
 import com.uos.uosinfo.domain.PathFinder;
 import com.uos.uosinfo.main.FloatingPopup;
 import com.uos.uosinfo.main.UosFragment;
+import com.uos.uosinfo.service.PathFinderService;
 import com.uos.uosinfo.ui.PagerPoint;
 import com.uos.uosinfo.utils.BgUtils;
-import com.uos.uosinfo.utils.DataBaseUtils;
-
-import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +29,7 @@ import java.util.List;
 public class PathFinderFragment extends UosFragment implements View.OnClickListener {
     private ImageButton mFloatingPlus;
     private FloatingPopup mfFloatingPopup;
+    PathFinderService mPathFinderService;
     ViewPager mViewPager;
     PathFinderAdapter mAdapter;
     List<PathFinder> mPath;
@@ -41,7 +37,6 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
     FrameLayout mPathFinderBg;
     int bgRes = R.mipmap.main_bg01;
     LinearLayout mOvalContainer;
-    DataBaseUtils mDataBaseUtils;
     private boolean language = false; // false : En , true : Ko;
     private boolean isThisMonth = true; // false : lastMonth, true : thisMonth\
 
@@ -57,7 +52,7 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
     }
 
     public void init() {
-        mDataBaseUtils = new DataBaseUtils(getContext());
+        mPathFinderService = new PathFinderService(getContext());
         mPathFinderBg = (FrameLayout) mView.findViewById(R.id.path_finder_bg);
         mFloatingPlus = (ImageButton) mView.findViewById(R.id.plus_button);
         mViewPager = (ViewPager) mView.findViewById(R.id.pathfinder_view_pager);
@@ -84,43 +79,19 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
         });
     }
     void getPathFinderThisMonthByDataBase(){
-        mPath = mDataBaseUtils.getPathFinderByParse(new Date(), true);
+        mPath = mPathFinderService.getPathFinderThisMonthByDataBase();
         setFragments();
         mAdapter = new PathFinderAdapter(getChildFragmentManager(),getContext(), mFragments);
         mViewPager.setAdapter(mAdapter);
-        if(mPath==null || mPath.isEmpty())
-            getPathFinderThisMonthByParse();
-        else
-            changeData();
-    }
-    void getPathFinderLastMonthByDataBase(){
-        mPath = mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(), true);
-        if(mPath==null || mPath.isEmpty())
-            getPathFinderLastMonthByParse();
-        else
-            changeData();
-    }
-    void getPathFinderThisMonthByParse(){
-        mPath = mDataBaseUtils.getPathFinderByParse(new Date(),false);
-        try {
-            ParseObject.pinAll(mPath);
-        }catch (ParseException e2) {
-            e2.printStackTrace();
-        }
         changeData();
     }
-    void getPathFinderLastMonthByParse(){
-        mPath = mDataBaseUtils.getPathFinderByParse(new DateTime().minusMonths(1).toDate(),false);
-        try {
-            ParseObject.pinAll(mPath);
-        }catch (ParseException e2) {
-            e2.printStackTrace();
-        }
+    void getPathFinderLastMonthByDataBase(){
+        mPath = mPathFinderService.getPathFinderLastMonthByDataBase();
         changeData();
     }
     private void setFragments(){
         mFragments.clear();
-        for(ParseObject pathFinder : mPath) {
+        for(PathFinder pathFinder : mPath) {
             Fragment fragment = new PathFinderItemFragment();
             Bundle bundle = new Bundle();
             bundle.putString("objectId", pathFinder.getObjectId());
