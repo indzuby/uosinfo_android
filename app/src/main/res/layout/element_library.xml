@@ -20,10 +20,12 @@
 
         <TextView
             android:id="@+id/library_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:paddingTop="5dp"
             android:layout_toRightOf="@+id/new_icon"
+            android:layout_toLeftOf="@+id/download"
             android:singleLine="true"
             android:text="2016학년도 수시모집 입시안내 공지"
             android:textColor="@color/path_contents"

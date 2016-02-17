@@ -9,7 +9,7 @@ import com.parse.ParseQuery;
  * Created by user on 2016-01-21.
  */
 @ParseClassName("Admission")
-public class Admission extends ParseObject {
+public class Admission extends Common {
 
     public String getUrl() {
         return getString("url");

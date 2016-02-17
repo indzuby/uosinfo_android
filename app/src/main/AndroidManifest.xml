@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <!--
       IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
       to match your app's package name + ".permission.C2D_MESSAGE".
@@ -18,7 +18,7 @@
     <uses-permission android:name="com.uos.uosinfo.permission.C2D_MESSAGE" />
     <application
         android:allowBackup="true"
-        android:name=".main.MainApplication"
+        android:name=".view.main.MainApplication"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -31,14 +31,28 @@
             android:name="com.parse.CLIENT_KEY"
             android:value="@string/parse_client_key" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".view.main.NoticeActivity"
             android:screenOrientation="portrait"
             android:icon="@mipmap/logo"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".main.StartActivity"
+            android:name=".view.information.DepartmentActivity"
+            android:screenOrientation="portrait"
+            android:icon="@mipmap/logo"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".view.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:icon="@mipmap/logo"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".view.main.StartActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -68,6 +82,7 @@
                 <category android:name="com.uos.uosinfo" />
             </intent-filter>
         </receiver>
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="@string/kakao_app_key"/>
     </application>
 
 </manifest>

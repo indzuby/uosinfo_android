@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uos.uosinfo.R;
-import com.uos.uosinfo.main.UosFragment;
-import com.uos.uosinfo.controller.CareerFinderFragment;
-import com.uos.uosinfo.controller.InformationFragment;
-import com.uos.uosinfo.controller.LibraryFragment;
-import com.uos.uosinfo.controller.PathFinderFragment;
-import com.uos.uosinfo.controller.QnaFragment;
+import com.uos.uosinfo.view.main.UosFragment;
+import com.uos.uosinfo.view.CareerFinderFragment;
+import com.uos.uosinfo.view.InformationFragment;
+import com.uos.uosinfo.view.LibraryFragment;
+import com.uos.uosinfo.view.PathFinderFragment;
+import com.uos.uosinfo.view.QnaFragment;
 
 /**
  * Created by user on 2015-12-30.

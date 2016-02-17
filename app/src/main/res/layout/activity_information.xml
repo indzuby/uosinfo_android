@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center"
     android:background="@mipmap/findyourpath_bg"
     android:layout_height="match_parent">
     <ListView
         android:padding="8dp"
-        android:dividerHeight="8dp"
+        android:dividerHeight="6dp"
+        android:divider="@color/translate"
         android:layout_width="match_parent"
         android:id="@+id/college_list_view"
         android:layout_height="match_parent">
 
     </ListView>
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/plus_button"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|end"
+        android:elevation="4dp"
+        android:background="@drawable/fab_oval"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@mipmap/fab_plus_open" />
+</FrameLayout>

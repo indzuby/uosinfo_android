@@ -9,7 +9,7 @@ import com.parse.ParseQuery;
  * Created by user on 2016-01-20.
  */
 @ParseClassName("Department")
-public class Department extends ParseObject {
+public class Department extends Common {
 
     public Integer getNumber() {
         return getInt("number");

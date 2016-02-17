@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:id="@+id/new_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@mipmap/new_button"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/notice_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/new_icon"
+            android:layout_toLeftOf="@+id/content_open"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:text="2016학년도 수시모집 입시안내 공지"
+            android:textColor="@color/path_contents"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/content_open"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:src="@mipmap/notice_open" />
+    </RelativeLayout>
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+        android:id="@+id/line"
+        android:background="@color/white"/>
+</LinearLayout>

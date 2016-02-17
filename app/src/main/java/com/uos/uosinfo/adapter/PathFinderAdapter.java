@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.uos.uosinfo.common.PathFinderInterface;
+import com.uos.uosinfo.view.common.PathFinderInterface;
 
 import java.util.List;
 

@@ -1,17 +1,12 @@
 package com.uos.uosinfo.domain;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 import com.parse.ParseClassName;
-import com.parse.ParseObject;
-
-import java.util.Date;
 
 /**
  * Created by user on 2016-01-20.
  */
 @ParseClassName("Notice")
-public class Notice extends ParseObject{
+public class Notice extends Common{
 
     public String getTitle() {
         return getString("title");
@@ -37,7 +32,7 @@ public class Notice extends ParseObject{
         put("url",url);
     }
 
-    public Boolean getIsNew() {
+    public Boolean isNew() {
         return getBoolean("isNew");
     }
 

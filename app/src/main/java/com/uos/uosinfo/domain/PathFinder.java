@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by 주현 on 2016-01-10.
  */
 @ParseClassName("PathFinder")
-public class PathFinder extends ParseObject {
+public class PathFinder extends Common {
 
 
     public PathFinder(){

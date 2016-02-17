@@ -2,14 +2,13 @@ package com.uos.uosinfo.domain;
 
 import com.parse.ParseClassName;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 /**
  * Created by 주현 on 2016-01-10.
  */
 @ParseClassName("Celebrity")
-public class Celebrity extends ParseObject{
+public class Celebrity extends Common{
     public String getName() {
         return getString("name");
     }
@@ -75,7 +74,7 @@ public class Celebrity extends ParseObject{
     }
 
     public String getFieldEn() {
-        return getString("fieldKo");
+        return getString("fieldEn");
     }
 
     public void setFieldEn(String fieldEn) {

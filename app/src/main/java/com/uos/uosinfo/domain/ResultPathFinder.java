@@ -9,7 +9,7 @@ import com.parse.ParseQuery;
  * Created by user on 2016-01-20.
  */
 @ParseClassName("ResultPathFinder")
-public class ResultPathFinder extends ParseObject {
+public class ResultPathFinder extends Common {
     Celebrity celebrity;
     public Celebrity getCelebrity() {
         if(celebrity !=null)

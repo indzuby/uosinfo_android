@@ -22,4 +22,9 @@
     <color name="word_unselected">#80FFFFFF</color>
     <color name="step_bar_off">#55ffffff</color>
     <color name="step_bar_on">#ffffff</color>
+    <color name="department_bg">#AAFFFFFF</color>
+    <color name="recuritment_color">#26C6DA</color>
+    <color name="library_background">#ECEFF1</color>
+    <color name="notice_open_background">#D5DBDF</color>
+    <color name="notice_contents">#607D8B</color>
 </resources>

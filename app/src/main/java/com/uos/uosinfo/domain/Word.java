@@ -2,14 +2,13 @@ package com.uos.uosinfo.domain;
 
 import com.parse.ParseClassName;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 /**
  * Created by user on 2016-01-20.
  */
 @ParseClassName("Word")
-public class Word extends ParseObject {
+public class Word extends Common {
 
     public String getWord() {
         return getString("word");

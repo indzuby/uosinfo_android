@@ -10,7 +10,7 @@ import com.parse.ParseQuery;
  */
 
 @ParseClassName("DepartmentImage")
-public class DepartmentImage extends ParseObject{
+public class DepartmentImage extends Common{
 
     Department department;
     public Department getDepartment(){

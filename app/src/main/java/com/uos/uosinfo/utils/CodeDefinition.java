@@ -18,4 +18,6 @@ public class CodeDefinition {
     final public static String CAREER_MANY_RESULT_OBJECTID = "JjGVVSnFc0";
     final public static String CAREER_NO_RESULT_OBJECTID = "gcYb2QzS1f";
     final public static String LIBERAL_OBJECTID = "4S4rQTgWsZ";
+    final public static String PHONE_01_LINK = "02-6490-6180";
+    final public static String PHONE_02_LINK = "02-6490-6189";
 }

@@ -1,17 +1,12 @@
 package com.uos.uosinfo.domain;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 import com.parse.ParseClassName;
-import com.parse.ParseObject;
-
-import java.util.Date;
 
 /**
  * Created by user on 2016-01-07.
  */
 @ParseClassName("Library")
-public class Library extends ParseObject{
+public class Library extends Common{
     public String getTitle() {
         return getString("title");
     }
