@@ -2,7 +2,6 @@ package com.uos.uosinfo.domain;
 
 import com.parse.ParseClassName;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 /**
@@ -33,14 +32,6 @@ public class Department extends Common {
 
     public void setIntroduction(String introduction) {
         put("introduction", introduction);
-    }
-
-    public String getRightPeople() {
-        return getString("rightPeople");
-    }
-
-    public void setRightPeople(String rightPeople) {
-        put("rightPeople", rightPeople);
     }
 
     public String getPhone() {

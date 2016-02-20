@@ -13,6 +13,7 @@ import com.uos.uosinfo.domain.DepartmentImage;
 import com.uos.uosinfo.domain.Library;
 import com.uos.uosinfo.domain.Notice;
 import com.uos.uosinfo.domain.PathFinder;
+import com.uos.uosinfo.domain.QnaBoard;
 import com.uos.uosinfo.domain.Recruitment;
 import com.uos.uosinfo.domain.RecruitmentType;
 import com.uos.uosinfo.domain.ResultPathFinder;
@@ -34,7 +35,6 @@ public class DataBaseUtils {
 
     public List<Library> getMoreLibrary(Date lastDate) {
         ParseQuery<Library> query = ParseQuery.getQuery(Library.class);
-        query = query.whereEqualTo("valid",true);
         if (lastDate == null) {
             query = query.orderByAscending("createdAt");
         } else {
@@ -49,8 +49,7 @@ public class DataBaseUtils {
 
     public List<Library> getLibraries() {
         ParseQuery<Library> query = ParseQuery.getQuery(Library.class);
-        query = query.whereEqualTo("valid",true);
-        query = query.orderByDescending("createdAt");
+        query = query.whereEqualTo("valid",true).orderByDescending("createdAt");
         query.fromPin();
         try {
             return query.find();
@@ -62,9 +61,12 @@ public class DataBaseUtils {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Library");
         return getLastDataBase(query);
     }
+    public Date getLastQna(){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("QnABoard");
+        return getLastDataBase(query);
+    }
     public Date getLastDataBase(ParseQuery<ParseObject> query){
-        query = query.whereEqualTo("valid",true);
-        query = query.orderByDescending("updatedAt");
+        query = query.whereEqualTo("valid",true).orderByDescending("updatedAt");
         query.fromPin();
         try {
             return query.find().get(0).getUpdatedAt();
@@ -91,7 +93,19 @@ public class DataBaseUtils {
     }
     public List<Notice> getMoreNotice(Date lastDate) {
         ParseQuery<Notice> query = ParseQuery.getQuery(Notice.class);
-        query = query.whereEqualTo("valid",true);
+        if (lastDate == null) {
+            query = query.orderByAscending("createdAt");
+        } else {
+            query = query.whereGreaterThanOrEqualTo("updatedAt", lastDate).orderByAscending("createdAt");
+        }
+        try {
+            return query.find();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
+    public List<QnaBoard> getMoreQna(Date lastDate) {
+        ParseQuery<QnaBoard> query = ParseQuery.getQuery(QnaBoard.class);
         if (lastDate == null) {
             query = query.orderByAscending("createdAt");
         } else {
@@ -255,4 +269,22 @@ public class DataBaseUtils {
         }
 
     }
+    public List<QnaBoard> getQna(){
+        ParseQuery<QnaBoard> query = ParseQuery.getQuery(QnaBoard.class);
+        query = query.whereEqualTo("valid",true).orderByAscending("createdAt");
+        try {
+            return query.fromPin().find();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    public QnaBoard sendQna(String qna,String token){
+        QnaBoard qnaBoard =new QnaBoard();
+        qnaBoard.setQuestion(qna);
+        qnaBoard.setUsetId(token);
+        qnaBoard.setValid(true);
+        qnaBoard.saveInBackground();
+        return qnaBoard;
+    }
+
 }

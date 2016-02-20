@@ -11,14 +11,14 @@ import com.uos.uosinfo.adapter.DepartmentAdapter;
 import com.uos.uosinfo.controller.InformationController;
 import com.uos.uosinfo.domain.College;
 import com.uos.uosinfo.domain.Department;
-import com.uos.uosinfo.view.main.BaseAcitvity;
+import com.uos.uosinfo.view.main.BaseActivity;
 
 import java.util.List;
 
 /**
  * Created by 주현 on 2016-02-08.
  */
-public class DepartmentActivity extends BaseAcitvity implements View.OnClickListener{
+public class DepartmentActivity extends BaseActivity implements View.OnClickListener{
     String mObjectId;
     List<Department> mDepartments;
     College mCollege;

@@ -27,4 +27,5 @@
     <color name="library_background">#ECEFF1</color>
     <color name="notice_open_background">#D5DBDF</color>
     <color name="notice_contents">#607D8B</color>
+    <color name="reqruitment_name">#37474F</color>
 </resources>

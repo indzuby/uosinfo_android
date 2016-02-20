@@ -2,7 +2,6 @@ package com.uos.uosinfo.domain;
 
 import com.parse.ParseClassName;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 /**
@@ -20,7 +19,7 @@ public class Admission extends Common {
     }
 
     public String getContent() {
-        return getString("rightPeople");
+        return getString("content");
     }
 
     public void setContent(String value) {

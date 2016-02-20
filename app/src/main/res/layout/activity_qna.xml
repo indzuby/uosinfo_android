@@ -3,8 +3,62 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="진로진학 상담"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:id="@+id/confirm_popup"
+        android:layout_height="match_parent">
+        <include layout="@layout/popup_confirm"/>
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:id="@+id/kakao_popup"
+        android:layout_height="match_parent">
+    <include layout="@layout/popup_kakao"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/qna_board"
+        android:background="@mipmap/findyourpath_bg"
+        android:layout_height="match_parent">
+        <ListView
+            android:layout_width="match_parent"
+            android:dividerHeight="0.5dp"
+            android:id="@+id/qna_list"
+            android:layout_above="@+id/edit_container"
+            android:divider="@color/white"
+            android:layout_height="match_parent"></ListView>
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:id="@+id/edit_container"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <EditText
+                android:background="@color/white"
+                android:id="@+id/qna_edittext"
+                android:layout_width="match_parent"
+                android:maxHeight="92dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:paddingLeft="8dp"
+                android:textSize="16sp"
+                android:layout_toLeftOf="@+id/send"
+                android:textColor="#CFD8DC"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:id="@+id/send"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:src="@drawable/qna_send_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp" />
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

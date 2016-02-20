@@ -10,7 +10,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 /**
  * Created by user on 2016-01-07.
  */
-public class BaseAcitvity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));

@@ -1,8 +1,6 @@
 package com.uos.uosinfo.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +18,7 @@ import com.uos.uosinfo.domain.DepartmentImage;
 import com.uos.uosinfo.domain.Recruitment;
 import com.uos.uosinfo.domain.RecruitmentType;
 import com.uos.uosinfo.utils.DataBaseUtils;
+import com.uos.uosinfo.view.information.DepartmentPopup;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -100,17 +99,34 @@ public class DepartmentAdapter extends BaseAdapter{
         mTitle.setText(department.getName());
         mContents.setText(department.getIntroduction());
         Glide.with(mContext).load(departmentImage.getImage()).into(mImage);
-        mInformation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse(department.getUrl());
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
-                mContext.startActivity(launchBrowser);
-            }
-        });
-
+//        mInformation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Uri uri = Uri.parse(department.getUrl());
+//                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
+//                mContext.startActivity(launchBrowser);
+//            }
+//        });
+        convertView.setOnClickListener(new DepartmentListner(department,admission,recruitments));
 
         return convertView;
+    }
+    class DepartmentListner implements View.OnClickListener{
+        Department department;
+        Admission admission;
+        List<Recruitment> recruitments;
+
+        public DepartmentListner(Department department, Admission admission, List<Recruitment> recruitments) {
+            this.department = department;
+            this.admission = admission;
+            this.recruitments = recruitments;
+        }
+
+        @Override
+        public void onClick(View v) {
+            DepartmentPopup popup = new DepartmentPopup(mContext,department,admission,recruitments);
+            popup.show();
+        }
     }
     public void getModelView(List<Recruitment> recruitments, LinearLayout layout){
         List<View> views = new ArrayList<>();

@@ -13,13 +13,14 @@ import com.uos.uosinfo.adapter.NoticeAdapter;
 import com.uos.uosinfo.domain.Notice;
 import com.uos.uosinfo.utils.DataBaseUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by 주현 on 2016-02-16.
  */
-public class NoticeActivity extends BaseAcitvity implements View.OnClickListener,SwipeRefreshLayout.OnRefreshListener{
+public class NoticeActivity extends BaseActivity implements View.OnClickListener,SwipeRefreshLayout.OnRefreshListener{
     SwipeRefreshLayout mSwipeRefreshLayout;
     ExpandableListView mListView;
     List<Notice> mNotices;
@@ -43,6 +44,13 @@ public class NoticeActivity extends BaseAcitvity implements View.OnClickListener
         mNoticeAdapter = new NoticeAdapter(this,mNotices);
         mListView.setAdapter(mNoticeAdapter);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        mListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                for (int i = 0; i < mNotices.size(); i++)
+                    if (i != groupPosition) mListView.collapseGroup(i);
+            }
+        });
         getMoreNotice();
     }
     private Date getLastDate(){
@@ -59,13 +67,17 @@ public class NoticeActivity extends BaseAcitvity implements View.OnClickListener
         }catch (ParseException e2) {
             e2.printStackTrace();
         }
+        List<Notice> deleteIndex = new ArrayList<>();
         for (Notice notice : notices) {
             int index = getIndexItem(notice.getObjectId());
             if(index == -1)
                 mNotices.add(0, notice);
-            else
-                mNotices.set(index,notice);
+            else {
+                deleteIndex.add(notice);
+                mNotices.set(index, notice);
+            }
         }
+        mNotices.removeAll(deleteIndex);
         mNoticeAdapter.notifyDataSetChanged();
         if(mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
 

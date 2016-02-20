@@ -12,7 +12,9 @@ import com.uos.uosinfo.domain.Celebrity;
 import com.uos.uosinfo.domain.College;
 import com.uos.uosinfo.domain.Department;
 import com.uos.uosinfo.domain.DepartmentImage;
+import com.uos.uosinfo.domain.Library;
 import com.uos.uosinfo.domain.PathFinder;
+import com.uos.uosinfo.domain.QnaBoard;
 import com.uos.uosinfo.domain.Recruitment;
 import com.uos.uosinfo.domain.RecruitmentType;
 import com.uos.uosinfo.domain.ResultPathFinder;
@@ -26,7 +28,7 @@ import java.util.Date;
 /**
  * Created by user on 2016-01-20.
  */
-public class StartActivity extends BaseAcitvity{
+public class StartActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class StartActivity extends BaseAcitvity{
         dataBaseUtils.getMoreDatabase(date, ParseQuery.getQuery(College.class));
         dataBaseUtils.getMoreDatabase(date, ParseQuery.getQuery(Department.class));
         dataBaseUtils.getMoreDatabase(date, ParseQuery.getQuery(DepartmentImage.class));
+        dataBaseUtils.getMoreDatabase(date, ParseQuery.getQuery(QnaBoard.class));
+        dataBaseUtils.getMoreDatabase(date, ParseQuery.getQuery(Library.class));
         dataBaseUtils.getMoreDatabase(date, ParseQuery.getQuery(PathFinder.class));
         dataBaseUtils.getMoreDatabase(date, ParseQuery.getQuery(Recruitment.class));
         dataBaseUtils.getMoreDatabase(date, ParseQuery.getQuery(RecruitmentType.class));

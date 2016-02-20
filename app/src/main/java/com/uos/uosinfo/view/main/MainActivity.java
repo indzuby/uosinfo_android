@@ -11,7 +11,7 @@ import com.uos.uosinfo.R;
 import com.uos.uosinfo.adapter.TabPagerAdapter;
 import com.uos.uosinfo.ui.MainViewPager;
 
-public class MainActivity extends BaseAcitvity{
+public class MainActivity extends BaseActivity {
     TabLayout tabLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

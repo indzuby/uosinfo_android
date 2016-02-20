@@ -88,7 +88,7 @@ public class TabPagerAdapter extends FragmentPagerAdapter{
                 }
                 break;
             case 2:
-                if(mQna !=null  && !initQna) {
+                if(mQna !=null) {
                     mQna.init();
                     initQna = true;
                 }

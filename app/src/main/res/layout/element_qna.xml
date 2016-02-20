@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="240dp"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:textSize="12sp"
+        android:textColor="#607D8B"
+        android:background="#CCFAFAFA"
+        android:text="자기소개서 작성할 때 학생부에 기재되어있지 않은 활동은 증빙서류를 제출해야 하나요?"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/answer"
+        android:layout_width="240dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:padding="8dp"
+        android:textSize="12sp"
+        android:layout_gravity="right"
+        android:textColor="@color/white"
+        android:background="#CC26C6DA"
+        android:text="자기소개서 작성할 때 학생부에 기재되어있지 않은 활동은 증빙서류를 제출해야 하나요?"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

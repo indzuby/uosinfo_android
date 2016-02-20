@@ -17,6 +17,7 @@ import com.uos.uosinfo.view.main.FloatingPopup;
 import com.uos.uosinfo.view.main.UosFragment;
 import com.uos.uosinfo.utils.DataBaseUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -68,13 +69,18 @@ public class LibraryFragment extends UosFragment implements View.OnClickListener
         }catch (ParseException e2) {
             e2.printStackTrace();
         }
+        List<Library> deleteIndex = new ArrayList<>();
         for (Library library : libraries) {
             int index = getIndexItem(library.getObjectId());
             if(index == -1)
                 list.add(0, library);
-            else
-                list.set(index,library);
+            else {
+                if(!library.getValid())
+                    deleteIndex.add(library);
+                list.set(index, library);
+            }
         }
+        list.removeAll(deleteIndex);
         adapter.notifyDataSetChanged();
         if(mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
     }
