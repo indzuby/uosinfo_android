@@ -1,28 +1,35 @@
 package com.uos.uosinfo.view.main;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kakao.auth.Session;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.adapter.TabPagerAdapter;
 import com.uos.uosinfo.ui.MainViewPager;
 
 public class MainActivity extends BaseActivity {
     TabLayout tabLayout;
+    TabPagerAdapter adapter;
+//    SessionCallback callback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        callback = new SessionCallback();
+//        Session.getCurrentSession().addCallback(callback);
+//        Session.getCurrentSession().checkAndImplicitOpen();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         final MainViewPager viewPager = (MainViewPager) findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(4);
-        final TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(),getBaseContext());
+        adapter = new TabPagerAdapter(getSupportFragmentManager(),getBaseContext());
         viewPager.setAdapter(adapter);
         viewPager.setPagingEnabled(false);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -66,4 +73,36 @@ public class MainActivity extends BaseActivity {
         img.setSelected(true);
         tab.select();
     }
+//
+//    private class SessionCallback implements ISessionCallback {
+//
+//        @Override
+//        public void onSessionOpened() {
+//            adapter.init(2);
+//        }
+//
+//        @Override
+//        public void onSessionOpenFailed(KakaoException exception) {
+//            if(exception != null) {
+//                Logger.e(exception);
+//            }
+//            AlertPopup alertPopup = new AlertPopup(getBaseContext(),"카카오톡 로그인에 실패했습니다\n카카오톡을 확인해주세요.",null);
+//            alertPopup.show();
+//        }
+//    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
 }

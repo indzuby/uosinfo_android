@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:id="@+id/qna_board"
-        android:background="@mipmap/findyourpath_bg"
+        android:background="@mipmap/counsel_bg"
         android:layout_height="match_parent">
         <ListView
             android:layout_width="match_parent"

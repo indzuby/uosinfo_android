@@ -1,5 +1,6 @@
 package com.uos.uosinfo.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,7 +25,6 @@ import com.uos.uosinfo.R;
 import com.uos.uosinfo.adapter.QnaAdapter;
 import com.uos.uosinfo.domain.QnaBoard;
 import com.uos.uosinfo.utils.DataBaseUtils;
-import com.uos.uosinfo.view.common.AlertPopup;
 import com.uos.uosinfo.view.main.UosFragment;
 
 import java.util.ArrayList;
@@ -49,9 +49,7 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
     boolean qna =false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.activity_qna,container,false);
-        accessToken = Session.getCurrentSession().getAccessToken();
-        accessToken = "tmp";
+        mView = inflater.inflate(R.layout.activity_qna, container, false);
         return mView;
     }
     public void init(){
@@ -59,6 +57,7 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
             getMoreQna();
             return ;
         }
+        accessToken = Session.getCurrentSession().getAccessToken();
         mDataBaseUtils = new DataBaseUtils(getContext());
         mKakaoPopup = (LinearLayout) mView.findViewById(R.id.kakao_popup);
         mConfirmPopup = (LinearLayout) mView.findViewById(R.id.confirm_popup);
@@ -133,6 +132,7 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
         }
         mQna.removeAll(deleteIndex);
         mQnaAdapter.notifyDataSetChanged();
+        mQnaList.setSelection(mQna.size()-1);
     }
     public Date getLastDate(){
         if(mQna==null || mQna.isEmpty())
@@ -149,6 +149,7 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
                 mQnaAdapter.notifyDataSetChanged();
                 Toast.makeText(getContext(),"질문이 등록되었습니다.",Toast.LENGTH_LONG).show();
                 mQnaEditText.setText("");
+                mQnaList.setSelection(mQna.size()-1);
             }
         }
     }
@@ -187,11 +188,26 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
         }
     };
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(callback);
+    }
     private class SessionCallback implements ISessionCallback {
 
         @Override
         public void onSessionOpened() {
             accessToken = Session.getCurrentSession().getAccessToken();
+            Toast.makeText(getContext(),"카카오톡 로그인에 성공했습니다",Toast.LENGTH_SHORT).show();
             initQnaBoard();
         }
 
@@ -200,8 +216,7 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
             if(exception != null) {
                 Logger.e(exception);
             }
-            AlertPopup alertPopup = new AlertPopup(getContext(),"카카오톡 로그인에 실패했습니다\n카카오톡을 확인해주세요.",null);
-            alertPopup.show();
+            Toast.makeText(getContext(),"카카오톡 로그인에 실패했습니다\n카카오톡을 확인해주세요.",Toast.LENGTH_SHORT).show();
         }
     }
 }
