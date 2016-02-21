@@ -53,7 +53,6 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
     EditText mQnaEditText;
     ListView mQnaList;
     ImageButton mSend;
-    boolean qna =false;
     DateTime lastQnaTime;
     int qnaCount;
     @Override
@@ -62,10 +61,6 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
         return mView;
     }
     public void init(){
-        if(qna) {
-            getMoreQna();
-            return ;
-        }
         accessToken = Session.getCurrentSession().getAccessToken();
         mDataBaseUtils = new DataBaseUtils(getContext());
         mKakaoPopup = (LinearLayout) mView.findViewById(R.id.kakao_popup);
@@ -75,7 +70,6 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
 
     }
     public void initQnaBoard(){
-        qna = true;
         lastQnaTime = new DateTime(mDataBaseUtils.getLastQna(accessToken));
         qnaCount = SessionUtils.getInt(getContext(), CodeDefinition.QNA_COUNT, 0);
         mKakaoPopup.setVisibility(View.GONE);
@@ -216,7 +210,6 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
         public void onClick(View v) {
             if(v.getId()==R.id.yes) {
                 if(accessToken!=null && !accessToken.isEmpty()) {
-                    qna=true;
                     initQnaBoard();
                 }else
                     initKakaoLogin();

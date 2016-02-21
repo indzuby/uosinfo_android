@@ -142,7 +142,7 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
             if (!isThisMonth) {
                 mHeaderView.setText("지난달의 패스파인더");
             } else {
-                mHeaderView.setText("이번달의 패스파인더");
+                mHeaderView.setText("이달의 패스파인더");
             }
         }else {
             if(!isThisMonth) {
