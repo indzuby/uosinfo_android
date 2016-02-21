@@ -230,7 +230,8 @@ public class CareerFinderFragment extends UosFragment{
             mCareerService.setBeforeSelectedCountByTotalSelectedCount();
             for (int i = 0; i < mTestStep; i++)
                 mView.findViewById(mStepBars[i]).setSelected(true);
-            mWordAdapter = new CareerWordAdapter(mCareerService.getNextWords(), getContext(), mNextListener);
+            List<Word> mWord = mCareerService.getNextWords();
+            mWordAdapter = new CareerWordAdapter(mWord, getContext(), mNextListener);
             mListView.setAdapter(mWordAdapter);
         }
     }

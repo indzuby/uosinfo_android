@@ -138,18 +138,32 @@ public class PathFinderFragment extends UosFragment implements View.OnClickListe
     public void changeLanguage(){
         language = !language;
         mAdapter.changeLanguage(language);
+        if(language) {
+            if (!isThisMonth) {
+                mHeaderView.setText("지난달의 패스파인더");
+            } else {
+                mHeaderView.setText("이번달의 패스파인더");
+            }
+        }else {
+            if(!isThisMonth) {
+                mHeaderView.setText("LAST MONTH`S PATHFINDER");
+            }else {
+                mHeaderView.setText("THIS MONTH`S PATHFINDER");
+            }
+
+        }
     }
     public void lastPathFinder(){
         mPath.clear();
 
-        if(isThisMonth) {
+        isThisMonth = !isThisMonth;
+        if(!isThisMonth) {
             getPathFinderLastMonthByDataBase();
-            mHeaderView.setText("LAST WEEK`S PATHFINDER");
+            mHeaderView.setText("LAST MONTH`S PATHFINDER");
         }else {
             getPathFinderThisMonthByDataBase();
-            mHeaderView.setText("THIS WEEK`S PATHFINDER");
+            mHeaderView.setText("THIS MONTH`S PATHFINDER");
         }
-        isThisMonth = !isThisMonth;
     }
 
     public boolean isThisMonth() {

@@ -19,6 +19,8 @@ import com.uos.uosinfo.domain.RecruitmentType;
 import com.uos.uosinfo.domain.ResultPathFinder;
 import com.uos.uosinfo.domain.Word;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -285,6 +287,15 @@ public class DataBaseUtils {
         qnaBoard.setValid(true);
         qnaBoard.saveInBackground();
         return qnaBoard;
+    }
+    public Date getLastQna(String userId) {
+        ParseQuery<QnaBoard> query = ParseQuery.getQuery(QnaBoard.class);
+        query = query.whereEqualTo("valid",true).orderByDescending("createdAt");
+        try {
+            return query.find().get(0).getCreatedAt();
+        }catch (Exception e){
+            return new DateTime().minusDays(10).toDate();
+        }
     }
 
 }

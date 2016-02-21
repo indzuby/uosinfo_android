@@ -17,6 +17,7 @@ import com.uos.uosinfo.view.common.PathFinderInterface;
 import com.uos.uosinfo.view.PathFinderFragment;
 import com.uos.uosinfo.domain.PathFinder;
 import com.uos.uosinfo.utils.DataBaseUtils;
+import com.uos.uosinfo.view.information.DepartmentActivity;
 
 /**
  * Created by 주현 on 2016-01-10.
@@ -75,6 +76,7 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
         mWikiEn.setOnClickListener(this);
         mWikiKo.setOnClickListener(this);
         mBook.setOnClickListener(this);
+        mCollege.setOnClickListener(this);
     }
     @Override
     public void setLanguage(boolean language){
@@ -140,6 +142,11 @@ public class PathFinderItemFragment extends Fragment implements View.OnClickList
             case R.id.path_finder_book:
                 uri = Uri.parse(mPath.getCelebrity().getBook());
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(launchBrowser);
+                break;
+            case R.id.path_finder_college:
+                launchBrowser = new Intent(getActivity(), DepartmentActivity.class) ;
+                launchBrowser.putExtra("objectId",mPath.getCelebrity().getCollege().getObjectId());
                 startActivity(launchBrowser);
                 break;
         }

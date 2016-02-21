@@ -63,15 +63,17 @@ public class CareerFinderController {
         for(int i = 0 ;i <CodeDefinition.CAREER_STEP_WORD_COUNT;i++) {
             Random r = new Random();
             int k ;
+            boolean flag;
             do {
                 k = r.nextInt(mWords.size());
-                boolean flag = false;
+                flag = false;
                 for(Word word : nextList) {
-                    if(word.getObjectId().equalsIgnoreCase(mWords.get(k).getObjectId()))
+                    if (word.getWord().equals(mWords.get(k).getWord())) {
                         flag = true;
+                        break;
+                    }
                 }
-                if(flag) continue;
-            }while(isWordsChecked[k]);
+            }while(isWordsChecked[k] || flag);
             isWordsChecked[k] = true;
             nextList.add(mWords.get(k));
         }

@@ -20,4 +20,9 @@ public class CodeDefinition {
     final public static String LIBERAL_OBJECTID = "4S4rQTgWsZ";
     final public static String PHONE_01_LINK = "02-6490-6180";
     final public static String PHONE_02_LINK = "02-6490-6189";
+    final public static String WEB_01_LINK = "http://www.uos.ac.kr";
+    final public static String WEB_02_LINK = "http://ao.uos.ac.kr";
+    final public static String WEB_03_LINK = "http://admission.uos.ac.kr";
+
+    final public static String QNA_COUNT = "QNA_COUNT";
 }

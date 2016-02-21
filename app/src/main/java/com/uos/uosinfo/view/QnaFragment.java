@@ -24,8 +24,15 @@ import com.parse.ParseObject;
 import com.uos.uosinfo.R;
 import com.uos.uosinfo.adapter.QnaAdapter;
 import com.uos.uosinfo.domain.QnaBoard;
+import com.uos.uosinfo.utils.CodeDefinition;
 import com.uos.uosinfo.utils.DataBaseUtils;
+import com.uos.uosinfo.utils.SessionUtils;
+import com.uos.uosinfo.view.common.AlertPopup;
 import com.uos.uosinfo.view.main.UosFragment;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Minutes;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +54,8 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
     ListView mQnaList;
     ImageButton mSend;
     boolean qna =false;
+    DateTime lastQnaTime;
+    int qnaCount;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.activity_qna, container, false);
@@ -62,15 +71,13 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
         mKakaoPopup = (LinearLayout) mView.findViewById(R.id.kakao_popup);
         mConfirmPopup = (LinearLayout) mView.findViewById(R.id.confirm_popup);
         mQnaBoard = (RelativeLayout) mView.findViewById(R.id.qna_board);
-        if(accessToken == null || accessToken.isEmpty()) {
-            qna = false;
-            initAcceptPopup();
-        }else
-            initQnaBoard();
+        initAcceptPopup();
 
     }
     public void initQnaBoard(){
         qna = true;
+        lastQnaTime = new DateTime(mDataBaseUtils.getLastQna(accessToken));
+        qnaCount = SessionUtils.getInt(getContext(), CodeDefinition.QNA_COUNT, 0);
         mKakaoPopup.setVisibility(View.GONE);
         mConfirmPopup.setVisibility(View.GONE);
         mQnaBoard.setVisibility(View.VISIBLE);
@@ -90,7 +97,7 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length()>0)
+                if (s.length() > 0)
                     mSend.setSelected(true);
                 else
                     mSend.setSelected(false);
@@ -139,17 +146,44 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
             return null;
         return mDataBaseUtils.getLastQna();
     }
-
+    public boolean checkAllowQna(){
+        DateTime currentDate = new DateTime();
+        if(lastQnaTime==null)
+            return true;
+        if(Days.daysBetween(lastQnaTime, currentDate).getDays()>=1) {
+            qnaCount=0;
+            return true;
+        }
+        else if(Minutes.minutesBetween(lastQnaTime, currentDate).getMinutes()>5)
+            if(qnaCount<3)
+                return true;
+            else
+                return false;
+        else
+            return false;
+    }
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.send) {
             if(v.isSelected()){
-                QnaBoard qna = mDataBaseUtils.sendQna(mQnaEditText.getText().toString(),accessToken);
-                mQna.add(qna);
-                mQnaAdapter.notifyDataSetChanged();
-                Toast.makeText(getContext(),"질문이 등록되었습니다.",Toast.LENGTH_LONG).show();
-                mQnaEditText.setText("");
-                mQnaList.setSelection(mQna.size()-1);
+
+                if(checkAllowQna()) {
+
+                    QnaBoard qna = mDataBaseUtils.sendQna(mQnaEditText.getText().toString(), accessToken);
+                    mQna.add(qna);
+                    mQnaAdapter.notifyDataSetChanged();
+                    Toast.makeText(getContext(), "질문이 등록되었습니다.", Toast.LENGTH_LONG).show();
+                    mQnaEditText.setText("");
+                    mQnaList.setSelection(mQna.size() - 1);
+                    qnaCount++;
+                    DateTime time = new DateTime();
+                    lastQnaTime = time;
+                    SessionUtils.putInt(getContext(),CodeDefinition.QNA_COUNT,qnaCount);
+                }else {
+                    AlertPopup popup = new AlertPopup(getActivity(),getString(R.string.qna_count_alert),null);
+                    popup.setButtonText("확인");
+                    popup.show();
+                }
             }
         }
     }
@@ -181,7 +215,11 @@ public class QnaFragment extends UosFragment implements View.OnClickListener{
         @Override
         public void onClick(View v) {
             if(v.getId()==R.id.yes) {
-                initKakaoLogin();
+                if(accessToken!=null && !accessToken.isEmpty()) {
+                    qna=true;
+                    initQnaBoard();
+                }else
+                    initKakaoLogin();
             }else if(v.getId() == R.id.no) {
                 mConfirmPopup.setVisibility(View.GONE);
             }

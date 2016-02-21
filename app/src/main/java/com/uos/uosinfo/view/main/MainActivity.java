@@ -1,10 +1,12 @@
 package com.uos.uosinfo.view.main;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,7 +47,8 @@ public class MainActivity extends BaseActivity {
                 selectedTab(tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
                 adapter.init(tab.getPosition());
-
+                InputMethodManager imm= (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(viewPager.getWindowToken(), 0);
             }
 
             @Override

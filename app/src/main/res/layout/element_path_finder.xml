@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
-        android:text="THIS WEEK`S PATHFINDER"
+        android:text="THIS MONTH`S PATHFINDER"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold" />

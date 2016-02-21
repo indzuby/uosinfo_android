@@ -4,7 +4,90 @@
     android:background="@color/floating_background"
     android:id="@+id/layout"
     android:layout_height="match_parent">
-
+    <LinearLayout
+        android:id="@+id/web_01_button"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        android:layout_marginBottom="332dp"
+        android:layout_marginRight="@dimen/fab_mini_margin"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:text="학교홈페이지"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:textColor="@color/fab_text_color"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="9dp"
+            android:background="@drawable/fab_mini_selector"
+            android:elevation="4dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="5dp"
+            android:src="@mipmap/department_web" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/web_02_button"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        android:layout_marginBottom="282dp"
+        android:layout_marginRight="@dimen/fab_mini_margin"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:text="입학사정관"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:textColor="@color/fab_text_color"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="9dp"
+            android:background="@drawable/fab_mini_selector"
+            android:elevation="4dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="5dp"
+            android:src="@mipmap/department_web" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/web_03_button"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        android:layout_marginBottom="232dp"
+        android:layout_marginRight="@dimen/fab_mini_margin"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:text="입학처"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:textColor="@color/fab_text_color"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="9dp"
+            android:background="@drawable/fab_mini_selector"
+            android:elevation="4dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="5dp"
+            android:src="@mipmap/department_web" />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/phone_01_button"
         android:layout_width="wrap_content"
