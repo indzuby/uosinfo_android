@@ -126,7 +126,7 @@ public class DepartmentPopup extends Dialog implements View.OnClickListener{
             getContext().startActivity(intent);
 
         }else if(v.getId() == R.id.web_layout || v.getId() == R.id.reqruitment_button) {
-            Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(department.getUrl()));
+            Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(admission.getUrl()));
             getContext().startActivity(launchBrowser);
         }
     }
